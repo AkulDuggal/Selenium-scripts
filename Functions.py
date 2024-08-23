@@ -83,21 +83,22 @@ def service_selection(driver):
     standard.click()
     print("Clicked standard service")
 
-def second_next_button(driver):   # this is not working....check
-    '''standard = WebDriverWait(driver, 10).until(
-        EC.element_to_be_clickable((By.XPATH, "(//span[normalize-space()='Next'])"))
+def second_next_button(driver): # this is not working....check
+    time.sleep(1)   
+    standard = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.XPATH, "(//div[@class='css-175oi2r r-1phboty'])[10]"))
     )
     time.sleep(1)
-    standard.click()'''
-    next_button = WebDriverWait(driver, 10).until(
+    standard.click()
+    '''next_button = WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((By.XPATH,"(//span[normalize-space()='Next'])" ))
     )
     
     # Wait until the "Next" button is clickable
     clickable_next_button = WebDriverWait(driver, 10).until(
         EC.element_to_be_clickable((By.XPATH,"(//span[normalize-space()='Next'])" ))
-    )
-    clickable_next_button.click()
+    )'''
+    standard.click()
     print("Clicked next button from the second function")
     
 

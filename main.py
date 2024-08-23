@@ -7,13 +7,14 @@ from Functions import (
     change_unit_number,
     click_next_button,
     click_skip_button,
-    service_selection
+    service_selection,
+    second_next_button
 )
 
 def main():
     driver = initialize_driver()
 
-    try:
+    try: #standard cleaning flow
         sign_in(driver, 'aduggal@amenify.com', 'Akulduggal46@123456')
         time.sleep(1)
         click_cleaning_service(driver)
@@ -23,8 +24,7 @@ def main():
         click_next_button(driver)
         click_skip_button(driver)
         service_selection(driver)
-        #The next button is not interactable...find a way.
-        #click_next_button(driver)
+        second_next_button(driver)
 
 
 
