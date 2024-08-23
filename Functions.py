@@ -28,12 +28,25 @@ def sign_in(driver, email, password):
     )
     sign_in_div.click()
 
-def click_cleaning_service(driver):
+
+def click_service_by_text(driver, service_text):
+    try:
+        service = WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.XPATH, f"//div[normalize-space()='{service_text}']"))
+        )
+        service.click()
+        print(f"'{service_text}' service clicked successfully")
+    except Exception as e:
+        print(f"Failed to click the '{service_text}' service")
+
+
+
+'''def click_cleaning_service(driver): #replaced this with click_service_by_text.....remove later
     cleaning_service = WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((By.XPATH, "//div[text()='Cleaning']"))
     )
     cleaning_service.click()
-    print("Cleaning service clicked successfully")
+    print("Cleaning service clicked successfully")'''
 
 def change_bedroom_bathroom(driver, num_bedrooms, num_bathrooms):
     dropdown = WebDriverWait(driver, 10).until(
@@ -83,21 +96,12 @@ def service_selection(driver):
     standard.click()
     print("Clicked standard service")
 
-def second_next_button(driver): # this is not working....check
+def second_next_button(driver): 
     time.sleep(1)   
     standard = WebDriverWait(driver, 10).until(
         EC.element_to_be_clickable((By.XPATH, "(//div[@class='css-175oi2r r-1phboty'])[10]"))
     )
     time.sleep(1)
-    standard.click()
-    '''next_button = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.XPATH,"(//span[normalize-space()='Next'])" ))
-    )
-    
-    # Wait until the "Next" button is clickable
-    clickable_next_button = WebDriverWait(driver, 10).until(
-        EC.element_to_be_clickable((By.XPATH,"(//span[normalize-space()='Next'])" ))
-    )'''
     standard.click()
     print("Clicked next button from the second function")
     

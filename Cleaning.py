@@ -8,7 +8,8 @@ from Functions import (
     click_next_button,
     click_skip_button,
     service_selection,
-    second_next_button
+    second_next_button,
+    click_service_by_text
 )
 
 def main():
@@ -17,10 +18,10 @@ def main():
     try: #standard cleaning flow
         sign_in(driver, 'aduggal@amenify.com', 'Akulduggal46@123456')
         time.sleep(1)
-        click_cleaning_service(driver)
+        click_service_by_text(driver,'Cleaning')
         time.sleep(2)
-        change_bedroom_bathroom(driver, 1, 1)
         change_unit_number(driver, '3')
+        change_bedroom_bathroom(driver, 1, 1)
         click_next_button(driver)
         click_skip_button(driver)
         service_selection(driver)
