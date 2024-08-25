@@ -10,7 +10,10 @@ from Functions import (
     click_skip_button,
     service_selection,
     second_next_button,
-    click_service_by_text
+    click_service_by_text,
+    click_element_by_xpath,
+    choose_type,
+    test_function
 )
 
 def main():
@@ -27,7 +30,11 @@ def main():
         click_skip_button(driver)
         service_selection(driver)
         second_next_button(driver)
-        #make function for one time/sub selection
+        choose_type(driver,'single')
+        #trying to make the next button clicked...
+        #click_element_by_xpath(driver,"(//div[@class='css-175oi2r'])[contains(@style,'align-items: flex-start;')][2]",3)
+        test_function(driver)
+       
 
 
 

@@ -5,7 +5,9 @@ from Functions import (
     click_service_by_text,
     change_bedroom_bathroom,
     change_unit_number,
-    click_next_button
+    click_next_button,
+    choose_type,
+    second_next_button
 )
 
 def main():
@@ -16,7 +18,9 @@ def main():
         change_unit_number(driver, '1')
         change_bedroom_bathroom(driver, 2, 3)
         click_next_button(driver)
-        # Make function to select one time/sub 
+        choose_type(driver,'single')
+        # try to click the next button from here.
+        second_next_button(driver)
 
 
         time.sleep(10)

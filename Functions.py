@@ -115,10 +115,51 @@ def second_next_button(driver):
     standard.click()
     print("Clicked next button from the second function")
     
-def click_element_by_xpath(driver, xpath, delay_seconds):  # find what this is for
-    element = WebDriverWait(driver, 10).until(
+def click_element_by_xpath(driver, xpath, delay_seconds):  # can use this to test if xpath is working...
+    '''element = WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((By.XPATH, xpath))
     )
     element.click()
     print(f"Clicked element with XPath: {xpath}")
-    time.sleep(delay_seconds)
+    time.sleep(delay_seconds)'''
+    time.sleep(1)   
+    standard = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.XPATH,xpath))
+    )
+    time.sleep(1)
+    standard.click()
+    print("Clicked next button from the second function")
+
+def choose_type(driver,type):
+    current_url=driver.current_url
+
+    if type=="single":
+        element=WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.XPATH,"//div[contains(text(),'One-time appointment')]"))
+        )
+        element.click()
+    elif type=="multi":
+        #need if/else as chores only has 3 sub options for stage.
+        if 'cleaning' in current_url:
+            element=WebDriverWait(driver, 10).until(
+                    EC.presence_of_element_located((By.XPATH,"(//div[contains(@class, 'css-146c3p1 r-fdjqy7') and contains(normalize-space(), 'Subscription')])[4]"))
+                )
+            element.click()
+        else:
+            element=WebDriverWait(driver, 10).until(
+                    EC.presence_of_element_located((By.XPATH,"(//div[contains(@class, 'css-146c3p1 r-fdjqy7') and contains(normalize-space(), 'Subscription')])[3]"))
+                )
+            element.click()
+
+    else:
+        print("no service available")
+        driver.quit()
+
+def test_function(driver): #test to successfully click the next button
+    time.sleep(1)
+    standard = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.XPATH, "//div[normalize-space(text())='Next']"))
+    )
+    time.sleep(3)
+    standard.click()
+    print("Clicked next button from the second function")
