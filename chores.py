@@ -1,7 +1,7 @@
 import time
 from Functions import (
     initialize_driver,
-    sign_in,
+    enter_info,
     click_service_by_text,
     change_bedroom_bathroom,
     change_unit_number,
@@ -9,13 +9,14 @@ from Functions import (
 )
 
 def main():
-    driver=initialize_driver()
+    driver=initialize_driver('sign-in')
     try:
-        sign_in(driver,'aduggal@amenify.com', 'Akulduggal46@123456')
+        enter_info(driver,'aduggal@amenify.com', 'Akulduggal46@123456')
         click_service_by_text(driver,'Chores')
         change_unit_number(driver, '1')
         change_bedroom_bathroom(driver, 2, 3)
         click_next_button(driver)
+        # Make function to select one time/sub 
 
 
         time.sleep(10)

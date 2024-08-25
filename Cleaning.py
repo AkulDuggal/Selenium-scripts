@@ -1,8 +1,9 @@
+#This is standard cleaning flow
 import time
 from Functions import (
     initialize_driver,
-    sign_in,
-    click_cleaning_service,
+    enter_info,
+    #click_cleaning_service,
     change_bedroom_bathroom,
     change_unit_number,
     click_next_button,
@@ -13,10 +14,10 @@ from Functions import (
 )
 
 def main():
-    driver = initialize_driver()
+    driver = initialize_driver('sign-in')
 
-    try: #standard cleaning flow
-        sign_in(driver, 'aduggal@amenify.com', 'Akulduggal46@123456')
+    try: 
+        enter_info(driver, 'aduggal@amenify.com', 'Akulduggal46@123456')
         time.sleep(1)
         click_service_by_text(driver,'Cleaning')
         time.sleep(2)
@@ -26,6 +27,7 @@ def main():
         click_skip_button(driver)
         service_selection(driver)
         second_next_button(driver)
+        #make function for one time/sub selection
 
 
 

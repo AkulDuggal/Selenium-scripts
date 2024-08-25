@@ -5,13 +5,17 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.select import Select
 import time
 
-def initialize_driver():
+def initialize_driver(access_type):
     driver = webdriver.Chrome()
+    if access_type=='sign-up':
+        driver.get('https://m.joinamenify.com/sign-up')
+    elif access_type=='sign-in':
+        driver.get('https://m.joinamenify.com/sign-in')
+    else:
+        driver.quit()
     return driver
 
-def sign_in(driver, email, password):
-    driver.get('https://m.joinamenify.com/sign-in')
-
+def enter_info(driver, email, password):
     input_fields = WebDriverWait(driver, 10).until(
         EC.presence_of_all_elements_located((By.CSS_SELECTOR, "input[data-testid='text-input-flat']"))
     )
@@ -23,10 +27,32 @@ def sign_in(driver, email, password):
     input_field_password.clear()
     input_field_password.send_keys(password)
 
-    sign_in_div = WebDriverWait(driver, 10).until(
+    # Make decisions based on the current URL
+    current_url = driver.current_url
+    if 'sign-in' in current_url:
+        print("Navigated to the Sign-In page.")
+        sign_in_next = WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((By.XPATH, "//div[@class='css-175oi2r r-1phboty']"))
-    )
-    sign_in_div.click()
+        )
+        sign_in_next.click()
+
+    elif 'sign-up' in current_url:
+        print("Navigated to the Sign-Up page.")
+        tick_box=WebDriverWait(driver,10).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR,"div[class='css-146c3p1 r-lrvibr']"))
+        )
+        tick_box.click()
+
+        sign_in_next = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.XPATH, "//div[@class='css-175oi2r r-1phboty']"))
+        )
+        sign_in_next.click()
+    else:
+        print("Unexpected URL!")
+        driver.quit()
+        return None
+    
+    return driver
 
 
 def click_service_by_text(driver, service_text):
@@ -39,14 +65,6 @@ def click_service_by_text(driver, service_text):
     except Exception as e:
         print(f"Failed to click the '{service_text}' service")
 
-
-
-'''def click_cleaning_service(driver): #replaced this with click_service_by_text.....remove later
-    cleaning_service = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.XPATH, "//div[text()='Cleaning']"))
-    )
-    cleaning_service.click()
-    print("Cleaning service clicked successfully")'''
 
 def change_bedroom_bathroom(driver, num_bedrooms, num_bathrooms):
     dropdown = WebDriverWait(driver, 10).until(
@@ -62,7 +80,7 @@ def change_unit_number(driver, unit_number):
     unit_number_field = WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((By.CSS_SELECTOR, "input[data-testid='text-input-flat']"))
     )
-    driver.execute_script("arguments[0].value = '';", unit_number_field)
+    driver.execute_script("arguments[0].value = '';", unit_number_field) #the unit number does not get cleared...check later
     unit_number_field.clear()
     unit_number_field.send_keys(unit_number)
 
@@ -72,14 +90,6 @@ def click_next_button(driver):
     )
     next_button.click()
     print("Moved to next page, from first click function")
-
-def click_element_by_xpath(driver, xpath, delay_seconds):
-    element = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.XPATH, xpath))
-    )
-    element.click()
-    print(f"Clicked element with XPath: {xpath}")
-    time.sleep(delay_seconds)
 
 def click_skip_button(driver):
     next_button = WebDriverWait(driver, 10).until(
@@ -105,4 +115,10 @@ def second_next_button(driver):
     standard.click()
     print("Clicked next button from the second function")
     
-
+def click_element_by_xpath(driver, xpath, delay_seconds):  # find what this is for
+    element = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.XPATH, xpath))
+    )
+    element.click()
+    print(f"Clicked element with XPath: {xpath}")
+    time.sleep(delay_seconds)
