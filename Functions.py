@@ -114,6 +114,15 @@ def second_next_button(driver):
     time.sleep(1)
     standard.click()
     print("Clicked next button from the second function")
+
+def second_next_button_chores(driver): 
+    time.sleep(1)   
+    standard = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.XPATH, "(//div[@class='css-175oi2r r-1phboty'])[8]"))
+    )
+    time.sleep(1)
+    standard.click()
+    print("Clicked next button from the second function")
     
 def click_element_by_xpath(driver, xpath, delay_seconds):  # can use this to test if xpath is working...
     '''element = WebDriverWait(driver, 10).until(
@@ -163,3 +172,37 @@ def test_function(driver): #test to successfully click the next button
     time.sleep(3)
     standard.click()
     print("Clicked next button from the second function")
+
+
+def selecting_chores(driver):
+    standard = WebDriverWait(driver, 10).until(
+        EC.presence_of_all_elements_located((By.XPATH, "(//div[@class='css-175oi2r'])"))
+    )
+
+    #print(f"Number of elements found: {len(standard)}") 141 elements returned.
+    
+    standard[83].click()  # 84th element (index starts at 0)
+    time.sleep(1)
+    print("Clicked first chore")
+
+    standard[89].click()  # 90th element
+    time.sleep(1)
+    print("Clicked second chore")
+
+    standard[95].click()  # 96th element
+    time.sleep(1)
+    print("Clicked third chore")
+    
+    
+def date_selection(driver,index):
+    # Construct the dynamic XPath with the provided index
+    xpath = f"(//div[@class='css-175oi2r r-1awozwy r-13awgt0'])[{index}]"
+    
+    # Wait for the element to be clickable
+    div_element = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.XPATH, xpath))
+    )
+    
+    # Click the located element
+    div_element.click()
+    print(f"Clicked the div element at index {index}")

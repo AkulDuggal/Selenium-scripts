@@ -1,10 +1,48 @@
-from time import time
-from selenium import webdriver
+from selenium.webdriver.support import expected_conditions as EC
+import time
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.support.ui import WebDriverWait
+from Functions import (
+    initialize_driver,
+    enter_info,
+    click_service_by_text,
+    change_bedroom_bathroom,
+    change_unit_number,
+    click_next_button,
+    choose_type,
+    second_next_button_chores,
+    selecting_chores,
+    second_next_button,
+    date_selection
+)
 
-# Replace with the path to your WebDriver executable
-driver = webdriver.Chrome()
+def main():
+    driver=initialize_driver('sign-in')
+    try:
+        enter_info(driver,'aduggal@amenify.com', 'Akulduggal46@123456')
+        click_service_by_text(driver,'Chores')
+        change_unit_number(driver, '1')
+        change_bedroom_bathroom(driver, 2, 3)
+        click_next_button(driver)
+        choose_type(driver,'single')
+        second_next_button_chores(driver)
+        selecting_chores(driver)
+        second_next_button(driver)
+        date_selection(driver,30)
+        #EVERYTHING ABOVE IS WORKING...WORK ON BELOW
 
-driver.get("m.joinamenify.com")
-time.sleep(5)
+        #Clicking checkout
+        time.sleep(2)
+        second_next_button(driver) #didnt work
 
-driver.quit()
+        time.sleep(10)
+
+    except Exception as e:
+        print(f"An error occurred: {e}")
+    finally:
+        driver.quit()
+
+if __name__ == "__main__":
+    main()
+

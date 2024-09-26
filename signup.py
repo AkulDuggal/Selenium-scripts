@@ -40,11 +40,12 @@ def main():
         time.sleep(1)
 
         #CHECK
-        '''#Work on this...choosing the property from dropdown box.
+        #Work on this...choosing the property from dropdown box.
         option = WebDriverWait(driver, 10).until(
             EC.visibility_of_element_located((By.XPATH, "//div[contains(@class, 'css-175oi2r') and contains(., 'Godrej Icon (from, internal)')]"))
         )
-        option.click()'''
+        option.click()
+    
 
         input_fields[2].send_keys(Keys.RETURN)
         time.sleep(2)
