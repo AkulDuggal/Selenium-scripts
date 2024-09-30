@@ -10,7 +10,8 @@ from Functions import (
     second_next_button_chores,
     selecting_chores,
     second_next_button,
-    date_selection
+    date_selection,
+    checkout_button
 )
 
 def main():
@@ -26,10 +27,10 @@ def main():
         selecting_chores(driver)
         second_next_button(driver)
         date_selection(driver, 30) #change according to the date to be selected 
-        #selecting date after chores selection
+        checkout_button(driver)
+
+        # select confirm button...
         
-
-
         
 
 

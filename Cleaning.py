@@ -12,7 +12,10 @@ from Functions import (
     second_next_button,
     click_service_by_text,
     click_element_by_xpath,
-    choose_type
+    choose_type,
+    next_button_for_cleaning1,
+    date_selection
+    
     
 )
 
@@ -31,9 +34,13 @@ def main():
         service_selection(driver)
         second_next_button(driver)
         choose_type(driver,'single')
-        #trying to make the next button clicked...
-        #try the logic of second_next_button_chores ....uses the same logic i think..
-        #click_element_by_xpath(driver,"(//div[@class='css-175oi2r'])[contains(@style,'align-items: flex-start;')][2]",3)
+        next_button_for_cleaning1(driver)
+        date_selection(driver, 30)
+        #need to add a select button after selecting date.
+        
+
+        
+
         
        
 

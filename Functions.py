@@ -206,3 +206,20 @@ def date_selection(driver,index):
     # Click the located element
     div_element.click()
     print(f"Clicked the div element at index {index}")
+
+def checkout_button(driver): 
+    time.sleep(1)   
+    standard = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.XPATH, "(//div[@class='css-175oi2r r-1phboty'])[12]"))
+    )
+    time.sleep(1)
+    standard.click()
+    print("Clicked next button from the second function")
+
+def next_button_for_cleaning1(driver):
+    time.sleep(2)
+    standard= WebDriverWait(driver,10).until(
+        EC.presence_of_element_located((By.XPATH,"(//div[@class='css-175oi2r'])[118]"))
+    )
+    time.sleep(1)
+    standard.click()
