@@ -220,7 +220,7 @@ def checkout_button(driver):
 def next_button_for_cleaning1(driver):
     time.sleep(2)
     standard= WebDriverWait(driver,10).until(
-        EC.presence_of_element_located((By.XPATH,"(//div[@class='css-175oi2r'])[118]"))
+        EC.presence_of_element_located((By.XPATH,"(//div[@class='css-175oi2r r-1phboty'])[12]"))
     )
     time.sleep(1)
     standard.click()
