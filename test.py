@@ -14,7 +14,10 @@ from Functions import (
     second_next_button_chores,
     selecting_chores,
     second_next_button,
-    date_selection
+    date_selection,
+    checkout_button,
+    promocode,
+    final_button_chore
 )
 
 def main():
@@ -29,12 +32,11 @@ def main():
         second_next_button_chores(driver)
         selecting_chores(driver)
         second_next_button(driver)
-        date_selection(driver,30)
-        #EVERYTHING ABOVE IS WORKING...WORK ON BELOW
-
-        #Clicking checkout
-        time.sleep(2)
-        second_next_button(driver) #didnt work
+        date_selection(driver, 30) #change according to the date to be selected 
+        checkout_button(driver)
+        promocode(driver,'OFF')
+        final_button_chore(driver)
+        
 
         time.sleep(10)
 

@@ -1,5 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.select import Select
@@ -223,3 +224,46 @@ def next_button_for_cleaning1(driver):
     )
     time.sleep(1)
     standard.click()
+
+
+def promocode(driver,code):
+    next_button = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.XPATH, "(//input[@autocapitalize='characters'])[1]"))
+        )
+    next_button.send_keys({code})
+    print("ADDED PROMO CODE")
+    time.sleep(5)
+    apply_button=WebDriverWait(driver,10).until(
+        EC.visibility_of_element_located((By.XPATH,"(//div[@class='css-175oi2r r-1phboty r-15d164r'])[1]"))
+        )
+    apply_button.click()
+    time.sleep(5)
+    
+    #service tip box selected
+    tip=WebDriverWait(driver,10).until(
+        EC.element_to_be_clickable((By.XPATH,"(//div[@class='css-175oi2r r-13awgt0 r-18u37iz'])[8]"))
+        )   
+    tip.click()
+
+    #to close the tip box
+    tip_close=WebDriverWait(driver,10).until(
+        EC.element_to_be_clickable((By.XPATH,"(//div[@class='css-175oi2r r-1phboty'])[15]"))
+        )   
+    tip_close.click()
+    time.sleep(5)
+
+    #to add tip(TO WORK ON)
+    '''tip_amount=WebDriverWait(driver,10).until(
+        EC.presence_of_element_located((By.XPATH,"(//div[@class='css-175oi2r'])[219]"))
+        )
+    
+    tip_amount.click()
+    tip_amount.send_keys({amount})'''    
+    
+
+def final_button_chore(driver):
+    done=WebDriverWait(driver,10).until(
+        EC.element_to_be_clickable((By.XPATH,"(//div[@class='css-175oi2r r-1phboty'])[14]"))
+    )
+    done.click()
+    print("Chore flow complete")

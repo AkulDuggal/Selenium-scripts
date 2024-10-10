@@ -11,7 +11,9 @@ from Functions import (
     selecting_chores,
     second_next_button,
     date_selection,
-    checkout_button
+    checkout_button,
+    promocode,
+    final_button_chore
 )
 
 def main():
@@ -28,8 +30,12 @@ def main():
         second_next_button(driver)
         date_selection(driver, 30) #change according to the date to be selected 
         checkout_button(driver)
+        promocode(driver,'OFF')
+        final_button_chore(driver)
+        
 
-        # select confirm button...
+        # To be able to click the add instruction button 
+        
         
         
 
