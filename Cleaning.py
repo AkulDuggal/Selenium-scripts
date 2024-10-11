@@ -39,8 +39,10 @@ def main():
         next_button_for_cleaning1(driver)
         date_selection(driver, 30)
         time.sleep(3)
-        #need to add a select button after selecting date.
         final_button_chore(driver) #change name to a commonn name.
+        #need to add for selecting chore.
+    
+        #didnt work
         selecting_chores(driver) # find a common name, also add ways to select which chore to select
 
 
