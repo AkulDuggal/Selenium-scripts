@@ -81,9 +81,10 @@ def change_unit_number(driver, unit_number):
     unit_number_field = WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((By.CSS_SELECTOR, "input[data-testid='text-input-flat']"))
     )
-    driver.execute_script("arguments[0].value = '';", unit_number_field) #the unit number does not get cleared...check later
-    unit_number_field.clear()
+    unit_number_field.click()
+    unit_number_field.send_keys(Keys.CONTROL + "a")  
     unit_number_field.send_keys(unit_number)
+    
 
 def click_next_button(driver):
     next_button = WebDriverWait(driver, 10).until(

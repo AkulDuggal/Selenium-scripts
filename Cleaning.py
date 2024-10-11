@@ -14,7 +14,9 @@ from Functions import (
     click_element_by_xpath,
     choose_type,
     next_button_for_cleaning1,
-    date_selection
+    date_selection,
+    final_button_chore,
+    selecting_chores
     
     
 )
@@ -36,7 +38,14 @@ def main():
         choose_type(driver,'single')
         next_button_for_cleaning1(driver)
         date_selection(driver, 30)
+        time.sleep(3)
         #need to add a select button after selecting date.
+        final_button_chore(driver) #change name to a commonn name.
+        selecting_chores(driver) # find a common name, also add ways to select which chore to select
+
+
+
+
         
 
         
