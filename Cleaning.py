@@ -16,7 +16,10 @@ from Functions import (
     next_button_for_cleaning1,
     date_selection,
     final_button_chore,
-    selecting_chores
+    add_ons,
+    final_next_cleaning,
+    promocode,
+    final_button_cleaning
     
     
 )
@@ -40,21 +43,11 @@ def main():
         date_selection(driver, 30)
         time.sleep(3)
         final_button_chore(driver) #change name to a commonn name.
-        #need to add for selecting chore.
-    
-        #didnt work
-        selecting_chores(driver) # find a common name, also add ways to select which chore to select
-
-
-
-
-        
-
-        
-
-        
-       
-
+        add_ons(driver) #MAKES IT COMPULSARY, MAKE IT THAT ITS A CHOICE
+        final_next_cleaning(driver)
+        #FINAL CHECKOUT SCREEN
+        #promocode(driver,'OFF') the service fee box is glitching here.
+        final_button_cleaning(driver)
 
 
         time.sleep(10)

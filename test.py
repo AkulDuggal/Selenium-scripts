@@ -18,7 +18,11 @@ from Functions import (
     choose_type,
     next_button_for_cleaning1,
     date_selection,
-    final_button_chore
+    final_button_chore,
+    add_ons,
+    final_next_cleaning,
+    promocode,
+    final_button_cleaning
     
     
 )
@@ -41,31 +45,19 @@ def main():
         next_button_for_cleaning1(driver)
         date_selection(driver, 30)
         time.sleep(3)
-        #need to add a select button after selecting date.
         final_button_chore(driver) #change name to a commonn name.
+        add_ons(driver)
+        final_next_cleaning(driver)
+        #FINAL CHECKOUT SCREEN
+        promocode(driver,'OFF')
+        #final_button_cleaning(driver)
 
-
-
-        #this takes me to checkout page, does not select add-on
-        standard = WebDriverWait(driver, 10).until(
-            EC.presence_of_all_elements_located((By.XPATH, "(//div[@class='css-175oi2r'])"))
-            )
-
-        print(f"Number of elements found: {len(standard)}") #135 elements returned.
-
-
-        #this might be the button to move ahead.
-        standard[134].click()  #the element in code is 133
-        time.sleep(1)
-        print("Clicked next button")
-
-        '''standard[136].click()  # 90th element
-        time.sleep(1)
-        print("Clicked second chore")
-
-        standard[139].click()  # 96th element
-        time.sleep(1)
-        print("Clicked third chore")'''
+        time.sleep(2)
+        done=WebDriverWait(driver,10).until(
+        EC.element_to_be_clickable((By.XPATH,"(//div[@class='css-175oi2r r-1phboty'])[18]"))
+        )
+        done.click()
+        print("Cleaning flow complete")
 
 
 

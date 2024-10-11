@@ -268,3 +268,40 @@ def final_button_chore(driver):
     )
     done.click()
     print("Chore flow complete")
+
+
+def add_ons(driver):
+        standard = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.XPATH, "(//div[@class='css-175oi2r r-1uavh4e r-42olwf r-z2wwpe r-rs99b7 r-5oul0u r-w7s2jr r-1qhn6m8 r-eoizbr'])[10]"))
+            )     
+        standard.click()   
+        
+        standard = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.XPATH, "(//div[@class='css-175oi2r r-1uavh4e r-42olwf r-z2wwpe r-rs99b7 r-5oul0u r-w7s2jr r-1qhn6m8 r-eoizbr'])[11]"))
+            ) 
+        standard.click()
+
+        standard = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.XPATH, "(//div[@class='css-175oi2r r-1uavh4e r-42olwf r-z2wwpe r-rs99b7 r-5oul0u r-w7s2jr r-1qhn6m8 r-eoizbr'])[12]"))
+            ) 
+        standard.click()
+#IF POSSIBLE, JOIN THESE 2 FUNCTIONS
+
+def final_next_cleaning(driver):
+    standard = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.XPATH, "(//div[@class='css-175oi2r r-1phboty'])[16]"))
+        )
+    standard.click() 
+    time.sleep(1)
+    print("Clicked next button")
+
+
+def final_button_cleaning(driver):
+    done=WebDriverWait(driver,10).until(
+        EC.element_to_be_clickable((By.XPATH,"(//div[@class='css-175oi2r r-1phboty'])[18]"))
+    )
+    done.click()
+    time.sleep(5)
+    print("Cleaning flow complete")
+
+
