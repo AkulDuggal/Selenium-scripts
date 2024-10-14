@@ -12,7 +12,15 @@ from Functions import (
     second_next_button,
     click_service_by_text,
     click_element_by_xpath,
-    choose_type
+    choose_type,
+    next_button_for_cleaning1,
+    date_selection,
+    final_button_chore,
+    add_ons,
+    final_next_cleaning,
+    promocode,
+    final_button_cleaning
+    
     
 )
 
@@ -31,12 +39,15 @@ def main():
         service_selection(driver)
         second_next_button(driver)
         choose_type(driver,'single')
-        #trying to make the next button clicked...
-        #try the logic of second_next_button_chores ....uses the same logic i think..
-        #click_element_by_xpath(driver,"(//div[@class='css-175oi2r'])[contains(@style,'align-items: flex-start;')][2]",3)
-        
-       
-
+        next_button_for_cleaning1(driver)
+        date_selection(driver, 30)
+        time.sleep(3)
+        final_button_chore(driver) #change name to a commonn name.
+        add_ons(driver) #MAKES IT COMPULSARY, MAKE IT THAT ITS A CHOICE
+        final_next_cleaning(driver)
+        #FINAL CHECKOUT SCREEN
+        #promocode(driver,'OFF') the service fee box is glitching here.
+        final_button_cleaning(driver)
 
 
         time.sleep(10)
