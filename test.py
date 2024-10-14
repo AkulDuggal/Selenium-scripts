@@ -33,31 +33,19 @@ def main():
     try: 
         enter_info(driver, 'aduggal@amenify.com', 'Akulduggal46@123456')
         time.sleep(1)
-        click_service_by_text(driver,'Cleaning')
-        time.sleep(2)
-        change_unit_number(driver, '3')
-        change_bedroom_bathroom(driver, 1, 1)
-        click_next_button(driver)
-        click_skip_button(driver)
-        service_selection(driver)
-        second_next_button(driver)
-        choose_type(driver,'single')
-        next_button_for_cleaning1(driver)
-        date_selection(driver, 30)
-        time.sleep(3)
-        final_button_chore(driver) #change name to a commonn name.
-        add_ons(driver)
-        final_next_cleaning(driver)
-        #FINAL CHECKOUT SCREEN
-        promocode(driver,'OFF')
-        #final_button_cleaning(driver)
 
-        time.sleep(2)
         done=WebDriverWait(driver,10).until(
-        EC.element_to_be_clickable((By.XPATH,"(//div[@class='css-175oi2r r-1phboty'])[18]"))
+        EC.visibility_of_element_located((By.XPATH,"(//div[@class='css-175oi2r r-1phboty r-1dzdj1l r-19jyx45 r-13qz1uu'])[1]"))
         )
         done.click()
-        print("Cleaning flow complete")
+        
+        done1=WebDriverWait(driver,10).until(
+        EC.visibility_of_element_located((By.XPATH,"(//div[@class='css-175oi2r r-1awozwy r-18u37iz r-1777fci'])[6]"))
+        )
+        done1.click()
+        time.sleep(5)
+        #can add assertion here for succesfully bought sub message.
+        print("Amenify sub bought")
 
 
 

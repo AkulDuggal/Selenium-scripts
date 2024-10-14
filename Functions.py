@@ -1,4 +1,5 @@
 from selenium import webdriver
+from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
@@ -303,5 +304,58 @@ def final_button_cleaning(driver):
     done.click()
     time.sleep(5)
     print("Cleaning flow complete")
+
+
+def amenify_one(driver):
+    done=WebDriverWait(driver,10).until(
+        EC.visibility_of_element_located((By.XPATH,"(//div[@class='css-175oi2r r-1phboty r-1dzdj1l r-19jyx45 r-13qz1uu'])[1]"))
+        )
+    done.click()
+        
+    done1=WebDriverWait(driver,10).until(
+    EC.visibility_of_element_located((By.XPATH,"(//div[@class='css-175oi2r r-1awozwy r-18u37iz r-1777fci'])[6]"))
+        )
+    done1.click()
+    time.sleep(5)
+        #can add assertion here for succesfully bought sub message.
+    print("Amenify sub bought")
+
+
+    
+def amenify_credits(driver, amount,type):
+    if type == "Card":
+        credits=WebDriverWait(driver,10).until(
+            EC.element_to_be_clickable((By.XPATH,"(//div[@class='css-175oi2r r-1i6wzkk r-lrvibr r-1loqt21 r-1otgn73'])[4]"))
+            )
+        credits.click()
+        print("amenify gift card selected")
+        time.sleep(2)
+
+    elif type == "Credits":
+        credits=WebDriverWait(driver,10).until(
+            EC.element_to_be_clickable((By.XPATH,"(//div[@class='css-175oi2r r-1i6wzkk r-lrvibr r-1loqt21 r-1otgn73'])[5]"))
+            )
+        credits.click()
+        print("discounted credits box clicked")
+
+    credits=WebDriverWait(driver,10).until(
+        EC.visibility_of_element_located((By.XPATH,"(//input[@placeholder='Enter a value between $50 and $500*'])"))
+            )
+    credits.send_keys({amount})
+
+    credits=WebDriverWait(driver,10).until(
+        EC.element_to_be_clickable((By.XPATH,"(//div[@class='css-175oi2r r-1awozwy r-1777fci'])[2]"))
+
+        )
+    credits.click()
+    print("credits bought")
+            
+    time.sleep(10)
+
+    
+            
+        
+
+
 
 
