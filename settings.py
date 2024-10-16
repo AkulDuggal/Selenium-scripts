@@ -67,9 +67,25 @@ def main():
         print("third setting clicked")
         time.sleep(2)
 
+        #common variable name for all settings.
+        all_elements=WebDriverWait(driver,10).until(
+            EC.presence_of_all_elements_located((By.XPATH,"(//div[@class='css-175oi2r r-1awozwy r-18u37iz'])"))
+        )
 
+        all_elements[2].click()
+        print("clicked 3rd setting")
+        time.sleep(2)
+        all_elements[2].click()
 
+        all_elements[3].click()
+        print("clicked 4th setting")
+        time.sleep(3)
+        all_elements[3].click()
 
+        all_elements[4].click()
+        print("clicked 5th setting")
+        time.sleep(3)
+        all_elements[4].click()
 
 
 
