@@ -134,15 +134,6 @@ def add_ons(driver):
             ) 
         standard.click()
 
-def final_next_cleaning(driver):
-    standard = WebDriverWait(driver, 10).until(
-            EC.element_to_be_clickable((By.XPATH, "(//div[@class='css-175oi2r r-1phboty'])[16]"))
-        )
-    standard.click() 
-    time.sleep(1)
-    print("Clicked next button")
-
-
 
 def click_skip_button(driver):
     next_button = WebDriverWait(driver, 10).until(
