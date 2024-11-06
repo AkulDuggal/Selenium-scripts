@@ -157,6 +157,13 @@ def choose_type(driver,type):
             EC.presence_of_element_located((By.XPATH,"//div[contains(text(),'One-time appointment')]"))
         )
         element.click()
+
+        element=WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.XPATH,"(//div[@class='css-175oi2r r-1awozwy r-18u37iz r-1777fci'])[12]"))
+        )
+        element.click()
+
+
     elif type=="multi":
         #need if/else as chores only has 3 sub options for stage.
         if 'cleaning' in current_url:

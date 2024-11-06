@@ -28,7 +28,7 @@ def main():
     driver = initialize_driver('sign-in')
 
     try: 
-        enter_info(driver, 'aduggal@amenify.com', 'Akulduggal46@123456')
+        enter_info(driver, 'aduggal+nov1@amenify.com', 'Akulduggal46@123456')
         time.sleep(1)
         click_service_by_text(driver,'Cleaning')
         time.sleep(2)
@@ -40,7 +40,7 @@ def main():
         second_next_button(driver)
         choose_type(driver,'single')
         next_button_for_cleaning1(driver)
-        date_selection(driver, 31)
+        date_selection(driver, 29)
         time.sleep(3)
         final_button_chore(driver) #change name to a commonn name.
         add_ons(driver) #MAKES IT COMPULSARY, MAKE IT THAT ITS A CHOICE
