@@ -13,21 +13,14 @@ from Functions import (
 def main():
     driver = initialize_driver('sign-in')
 
-    try: 
-        enter_info(driver, 'aduggal@amenify.com', 'Akulduggal46@123456')
-        time.sleep(5)
-
-        #GO TO SETTINGS PAGE
+    def settings(driver):
         settings=WebDriverWait(driver,10).until(
             EC.element_to_be_clickable((By.XPATH,"(//button[@role='button'])[4]"))
         ).click()
         print("settings button clicked")
 
-
-
-        #SELECT FIRST SETTING
-        #(//div[@class='css-175oi2r r-1awozwy r-18u37iz']) IS THE COMMON FOR ALL SETTINGS.
-        '''settings_one=WebDriverWait(driver,10).until(
+    def setting_one(driver):
+        settings_one=WebDriverWait(driver,10).until(
             EC.element_to_be_clickable((By.XPATH,"(//div[@class='css-175oi2r r-1awozwy r-18u37iz'])[1]"))
         ).click()
         print("first setting clicked")
@@ -43,23 +36,65 @@ def main():
         ).click()
         print("Back to settings")
 
-        #second setting
+    
+    def setting_two(driver):
         settings_2=WebDriverWait(driver,10).until(
             EC.element_to_be_clickable((By.XPATH,"(//div[@class='css-175oi2r r-1awozwy r-18u37iz'])[2]"))
         ).click()
         print("Second setting clicked")
         time.sleep(2)
 
-        settings=WebDriverWait(driver,10).until(
+        #Clicking this increases the count of array for a while due to success message ddisplayed
+        '''settings=WebDriverWait(driver,10).until(
             EC.element_to_be_clickable((By.XPATH,"(//div[@class='css-175oi2r r-1phboty r-13qz1uu'])[1]"))
         ).click()
         print("settings updated")
-        time.sleep(5)
+        time.sleep(5)'''
 
         settings=WebDriverWait(driver,10).until(
             EC.element_to_be_clickable((By.XPATH,"(//div[@class='css-146c3p1 r-lrvibr r-1loqt21'])[1]"))
         ).click()
-        print("Back to settings")'''
+        print("Back to settings")
+
+
+    def settings_common(driver):
+        all_elements=WebDriverWait(driver,10).until(
+            EC.presence_of_all_elements_located((By.XPATH,"(//div[@class='css-175oi2r r-1awozwy r-18u37iz'])"))
+        )
+        all_elements[2].click()
+        print("clicked 3rd setting")
+        time.sleep(2)
+        all_elements[2].click()
+
+        all_elements[3].click()
+        print("clicked 4th setting")
+        time.sleep(3)
+        all_elements[3].click()
+
+        all_elements[4].click()
+        print("clicked 5th setting")
+        time.sleep(3)
+        all_elements[4].click()
+
+
+
+    try: 
+        enter_info(driver, 'aduggal+nov1@amenify.com', 'Akulduggal46@123456')
+        time.sleep(5)
+
+        #GO TO SETTINGS PAGE
+
+        settings(driver)
+        time.sleep(1)
+        setting_one(driver)
+        time.sleep(1)
+        setting_two(driver)
+        time.sleep(1)
+        settings_common(driver)
+
+        #(//div[@class='css-175oi2r r-1awozwy r-18u37iz']) IS THE COMMON FOR ALL SETTINGS.
+        
+
 
         #3rd setting , clicking this increases the count in array
         '''settings_2=WebDriverWait(driver,10).until(
@@ -80,13 +115,13 @@ def main():
 
         settings_2=WebDriverWait(driver,10).until(
             EC.element_to_be_clickable((By.XPATH,"(//div[@class='css-175oi2r r-1awozwy r-18u37iz'])[3]"))
-        )'''
+        )
 
         all_elements=WebDriverWait(driver,10).until(
             EC.presence_of_all_elements_located((By.XPATH,"(//div[@class='css-175oi2r r-1awozwy r-18u37iz'])"))
         )
         # the code below is working, need to find a way to click "success" message or avoid it to let the flow continue.
-        '''all_elements[0].click()
+        all_elements[0].click()
 
         settings=WebDriverWait(driver,10).until(
             EC.element_to_be_clickable((By.XPATH,"(//div[@class='css-175oi2r r-1phboty r-13qz1uu'])[1]"))
@@ -119,24 +154,6 @@ def main():
         ).click()
         print("Back to settings")
         time.sleep(4)'''
-
-
-        all_elements[2].click()
-        print("clicked 3rd setting")
-        time.sleep(2)
-        all_elements[2].click()
-
-        all_elements[3].click()
-        print("clicked 4th setting")
-        time.sleep(3)
-        all_elements[3].click()
-
-        all_elements[4].click()
-        print("clicked 5th setting")
-        time.sleep(3)
-        all_elements[4].click()
-
-
 
         time.sleep(10)
     

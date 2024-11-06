@@ -1,28 +1,16 @@
-from selenium.webdriver.support import expected_conditions as EC
-import time
+from selenium import webdriver
+from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.select import Select
+import time
 from Functions import (
     initialize_driver,
     enter_info,
-    #click_cleaning_service,
-    change_bedroom_bathroom,
-    change_unit_number,
-    click_next_button,
-    click_skip_button,
-    service_selection,
-    second_next_button,
-    click_service_by_text,
-    click_element_by_xpath,
-    choose_type,
-    next_button_for_cleaning1,
-    date_selection,
-    final_button_chore,
-    add_ons,
-    final_next_cleaning,
-    promocode,
-    final_button_cleaning
+    click_service_by_text
+    
     
     
 )
@@ -31,29 +19,42 @@ def main():
     driver = initialize_driver('sign-in')
 
     try: 
-        enter_info(driver, 'aduggal@amenify.com', 'Akulduggal46@123456')
+        enter_info(driver, 'aduggal+nov1@amenify.com', 'Akulduggal46@123456')
+        time.sleep(2)
+
+        #HANDYMAN TESTING
+        first_window=driver.current_window_handle
+        click_service_by_text(driver,'Handyman')
+        time.sleep(4)
+        
+
+        #popup close
+        handyman_start=WebDriverWait(driver,10).until(
+            EC.visibility_of_element_located((By.XPATH,"(//div[@class='swal-button-container'])[1]"))
+        )
+        handyman_start.click()
+        print("clicked ok button")
         time.sleep(1)
 
-        done=WebDriverWait(driver,10).until(
-        EC.visibility_of_element_located((By.XPATH,"(//div[@class='css-175oi2r r-1phboty r-1dzdj1l r-19jyx45 r-13qz1uu'])[1]"))
+
+        #date selection
+        date_select=WebDriverWait(driver, 10).until(
+            EC.visibility_of_element_located((By.XPATH,"(//input[@id='dpDate'])[1]"))
         )
-        done.click()
-        
-        done1=WebDriverWait(driver,10).until(
-        EC.visibility_of_element_located((By.XPATH,"(//div[@class='css-175oi2r r-1awozwy r-18u37iz r-1777fci'])[6]"))
+        date_select.click()
+        time.sleep(1)
+
+        dates=WebDriverWait(driver,10).until(
+            EC.element_to_be_clickable((By.XPATH,"(//a[normalize-space()='27'])[1]"))
         )
-        done1.click()
-        time.sleep(5)
-        #can add assertion here for succesfully bought sub message.
-        print("Amenify sub bought")
+        dates.click()
+        print("date selected")
 
 
 
 
+        #driver.switch_to.window(first_window)
 
-
-
-        
 
         time.sleep(10)
 
