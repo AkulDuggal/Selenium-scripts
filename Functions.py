@@ -6,6 +6,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.select import Select
 import time
+from selenium.webdriver.common.action_chains import ActionChains
 
 def initialize_driver(access_type):
     driver = webdriver.Chrome()
@@ -367,9 +368,16 @@ def amenify_credits(driver, amount,type):
     time.sleep(10)
 
     
-            
-        
+def chores_popup_button(driver):
+    time.sleep(2)
+    standard= WebDriverWait(driver,10).until(
+        EC.element_to_be_clickable((By.XPATH,"(//div[@class='css-175oi2r r-1phboty r-9jpwak'])[1]"))
+    )
+    
+    standard.click() 
 
-
-
+def corner_click(driver):
+    # Use JavaScript to simulate a click at coordinates (0, 0)
+    driver.execute_script("var evt = new MouseEvent('click', {clientX: 100, clientY: 100}); document.elementFromPoint(0, 0).dispatchEvent(evt);")
+    
 

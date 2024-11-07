@@ -13,18 +13,22 @@ from Functions import (
     date_selection,
     checkout_button,
     promocode,
-    final_button_chore
+    final_button_chore,
+    chores_popup_button
+    
 )
 
 def main():
     driver=initialize_driver('sign-in')
     try:
-        enter_info(driver,'aduggal@amenify.com', 'Akulduggal46@123456')
+        enter_info(driver,'aduggal+nov1@amenify.com', 'Akulduggal46@123456')
         click_service_by_text(driver,'Chores')
         change_unit_number(driver, '1')
         change_bedroom_bathroom(driver, 2, 3)
         click_next_button(driver)
         choose_type(driver,'single')
+        time.sleep(2)
+        chores_popup_button(driver) #this is not working, hence flow is incomplete
         second_next_button_chores(driver)
         selecting_chores(driver)
         second_next_button(driver)
