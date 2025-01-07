@@ -28,7 +28,7 @@ def main():
     driver = initialize_driver('sign-in')
 
     try: 
-        enter_info(driver, 'aduggal+nov1@amenify.com', 'Akulduggal46@123456')
+        enter_info(driver, 'aduggal+gcp2@amenify.com', 'Akulduggal46@123456')
         time.sleep(1)
         click_service_by_text(driver,'Cleaning')
         time.sleep(2)
