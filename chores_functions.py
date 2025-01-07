@@ -193,10 +193,18 @@ def cleaning_popup_button(driver):
     actions.move_to_element(okay_button).click().perform()
 
 def next_button_for_cleaning1(driver):
-    time.sleep(2)
-    standard = WebDriverWait(driver, 10).until(
-        EC.element_to_be_clickable((By.XPATH, "(//div[normalize-space()='Next'])[1]"))
-    )
-    #(//span[normalize-space()='Next'])[1]
-    time.sleep(1)
-    standard.click()
+    try:
+        time.sleep(2)  # Consider replacing this with an explicit wait
+
+        # Wait for the "Next" button to be clickable
+        standard = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.XPATH, "(//div[@class='css-175oi2r r-1i6wzkk r-lrvibr r-1loqt21 r-1otgn73 r-1awozwy r-1wtzoqk r-cayec9 r-1fuqb1j r-1yadl64 r-18u37iz r-1cmwbt1 r-1777fci r-6dt33c r-ywh0we r-284m6k r-iyfy8q'])"))
+        )
+        standard.click()
+    
+    except Exception as e:
+        # Print the error message for debugging
+        print(f"Error: Could not click the 'Next' button - {str(e)}")
+
+        # Raise the exception so the script does not proceed silently
+        raise Exception("Failed to click the 'Next' button. Check if it's present and clickable.")
