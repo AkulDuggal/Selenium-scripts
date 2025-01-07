@@ -55,9 +55,10 @@ def main():
         time.sleep(2)
         second_next_button(driver)
         time.sleep(2)
-        choose_type(driver,'multi')  #the pop up is not interactable at all...so using sub
+        choose_type(driver,'single')  
         time.sleep(2)
-        #cleaning_popup_button(driver) this is not working what so ever
+        cleaning_popup_button(driver) # ADD THIS TO THE ABOVE FUNCTION LATER
+        time.sleep(2)
         next_button_for_cleaning1(driver)
         
 

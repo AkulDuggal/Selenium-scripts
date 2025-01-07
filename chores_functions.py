@@ -146,10 +146,10 @@ def choose_type(driver,type):
         )
         element.click()
 
-        element=WebDriverWait(driver, 10).until(
+        '''element=WebDriverWait(driver, 10).until(
             EC.presence_of_element_located((By.XPATH,"(//div[@class='css-175oi2r r-1awozwy r-18u37iz r-1777fci'])[12]"))
         )
-        element.click()
+        element.click()'''
 
 
     elif type=="multi":
@@ -171,28 +171,16 @@ def choose_type(driver,type):
 
 #THIS SHOULD CLICK OK FOR CLEANING POPUP
 def cleaning_popup_button(driver):
-    '''time.sleep(2)
+    time.sleep(2)
     try:
-        standard= WebDriverWait(driver,10).until(
-            EC.element_to_be_clickable((By.XPATH,"(//button[text()='OKAY']"))
-        )
-        
-        #(//div[@class='css-175oi2r r-1awozwy r-18u37iz r-1777fci'])[1]
-        standard.click()
-        
-    except ElementClickInterceptedException:'''
-    '''    print("Element click intercepted by popup. Attempting to close popup...")
-    Alert alert = driver.switchTo().alert();
-    String alertText = alert.getText();
-    alert.accept();'''
-    #driver.find_element(By.XPATH, "//*[text()='OKAY']").click()
-    okay_button = WebDriverWait(driver, 10).until(
-        EC.element_to_be_clickable((By.XPATH, "//*[contains(text(), 'OKAY')]"))
-    )
-    actions = ActionChains(driver)
-    actions.move_to_element(okay_button).click().perform()
+        okay_button = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//button[@data-testid='button']")))
+        okay_button.click()
 
+    except ElementClickInterceptedException:
+        print("Element click intercepted by popup. Attempting to close popup...")
+    
 def next_button_for_cleaning1(driver):
+
     try:
         time.sleep(2)  # Consider replacing this with an explicit wait
 
