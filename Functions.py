@@ -5,6 +5,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.select import Select
+from selenium.common.exceptions import TimeoutException, ElementClickInterceptedException
 import time
 from selenium.webdriver.common.action_chains import ActionChains
 
@@ -120,7 +121,7 @@ def service_selection(driver):
 def second_next_button(driver): 
     time.sleep(1)   
     standard = WebDriverWait(driver, 10).until(
-        EC.element_to_be_clickable((By.XPATH, "(//div[@class='css-175oi2r r-1phboty'])[10]"))
+        EC.element_to_be_clickable((By.XPATH, "(//div[@class='css-175oi2r r-1phboty'])[9]"))
     )
     time.sleep(1)
     standard.click()
@@ -237,7 +238,7 @@ def checkout_button(driver):
 def next_button_for_cleaning1(driver):
     time.sleep(2)
     standard= WebDriverWait(driver,10).until(
-        EC.presence_of_element_located((By.XPATH,"(//div[@class='css-175oi2r r-1phboty'])[12]"))
+        EC.presence_of_element_located((By.XPATH,"(//div[@class='css-175oi2r r-1phboty'])[11]"))
     )
     time.sleep(1)
     standard.click()
@@ -280,7 +281,7 @@ def promocode(driver,code):
 
 def final_button_chore(driver):
     done=WebDriverWait(driver,10).until(
-        EC.element_to_be_clickable((By.XPATH,"(//div[@class='css-175oi2r r-1phboty'])[14]"))
+        EC.element_to_be_clickable((By.XPATH,"(//div[@class='css-175oi2r r-1phboty'])[13]")) #18th DECEMBER..CHANGED FRO CLEANING , CHECK CHORES
     )
     done.click()
     print("Chore flow complete")
@@ -305,7 +306,7 @@ def add_ons(driver):
 
 def final_next_cleaning(driver):
     standard = WebDriverWait(driver, 10).until(
-            EC.element_to_be_clickable((By.XPATH, "(//div[@class='css-175oi2r r-1phboty'])[16]"))
+            EC.element_to_be_clickable((By.XPATH, "(//div[@class='css-175oi2r r-1phboty'])[15]"))
         )
     standard.click() 
     time.sleep(1)
@@ -314,7 +315,7 @@ def final_next_cleaning(driver):
 
 def final_button_cleaning(driver):
     done=WebDriverWait(driver,10).until(
-        EC.element_to_be_clickable((By.XPATH,"(//div[@class='css-175oi2r r-1phboty'])[18]"))
+        EC.element_to_be_clickable((By.XPATH,"(//div[@class='css-175oi2r r-1phboty'])[17]"))
     )
     done.click()
     time.sleep(5)
@@ -370,11 +371,15 @@ def amenify_credits(driver, amount,type):
     
 def chores_popup_button(driver):
     time.sleep(2)
-    standard= WebDriverWait(driver,10).until(
-        EC.element_to_be_clickable((By.XPATH,"(//div[@class='css-175oi2r r-1phboty r-9jpwak'])[1]"))
-    )
-    
-    standard.click() 
+    try:
+        standard= WebDriverWait(driver,10).until(
+            EC.element_to_be_clickable((By.XPATH,"(//div[@class='css-146c3p1 r-fdjqy7 r-1ifxtd0 r-1un7vkp'])[1]"))
+        )
+        
+        standard.click()
+        
+    except ElementClickInterceptedException:
+        print("Element click intercepted by popup. Attempting to close popup...")
 
 def corner_click(driver):
     # Use JavaScript to simulate a click at coordinates (0, 0)

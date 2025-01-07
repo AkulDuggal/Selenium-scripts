@@ -14,14 +14,15 @@ from Functions import (
     checkout_button,
     promocode,
     final_button_chore,
-    chores_popup_button
+    chores_popup_button,
+    
     
 )
 
 def main():
     driver=initialize_driver('sign-in')
     try:
-        enter_info(driver,'aduggal+nov1@amenify.com', 'Akulduggal46@123456')
+        enter_info(driver,'aduggal+gcp2@amenify.com', 'Akulduggal46@123456')
         click_service_by_text(driver,'Chores')
         change_unit_number(driver, '1')
         change_bedroom_bathroom(driver, 2, 3)
