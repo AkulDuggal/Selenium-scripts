@@ -186,10 +186,42 @@ def next_button_for_cleaning1(driver):
 
         # Wait for the "Next" button to be clickable
         standard = WebDriverWait(driver, 10).until(
-            EC.element_to_be_clickable((By.XPATH, "(//div[@class='css-175oi2r r-1i6wzkk r-lrvibr r-1loqt21 r-1otgn73 r-1awozwy r-1wtzoqk r-cayec9 r-1fuqb1j r-1yadl64 r-18u37iz r-1cmwbt1 r-1777fci r-6dt33c r-ywh0we r-284m6k r-iyfy8q'])"))
+            EC.element_to_be_clickable((By.XPATH, "(//div[@class='css-175oi2r r-1i6wzkk r-lrvibr r-1loqt21 r-1otgn73 r-1awozwy r-1wtzoqk r-cayec9 r-1fuqb1j r-1yadl64 r-18u37iz r-1cmwbt1 r-1777fci r-6dt33c r-ywh0we r-284m6k r-iyfy8q'])[3]"))
         )
         standard.click()
     
+    except Exception as e:
+        # Print the error message for debugging
+        print(f"Error: Could not click the 'Next' button - {str(e)}")
+
+        # Raise the exception so the script does not proceed silently
+        raise Exception("Failed to click the 'Next' button. Check if it's present and clickable.")
+    
+def date_selection(driver,index):
+    # Construct the dynamic XPath with the provided index
+    xpath = f"(//div[@class='css-175oi2r r-1awozwy r-13awgt0'])[{index}]"
+    
+    # Wait for the element to be clickable
+    div_element = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.XPATH, xpath))
+    )
+    
+    # Click the located element
+    div_element.click()
+    print(f"Clicked the div element at index {index}")
+
+def final_button_chore(driver):
+    '''done = WebDriverWait(driver,10).until(
+        EC.element_to_be_clickable((By.XPATH,"//div[contains(text(),'Next')]")) #18th DECEMBER..CHANGED FRO CLEANING , CHECK CHORES
+    )
+    done.click()
+    print("Chore flow complete")'''
+    try:
+        next_button = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.XPATH, "//div[contains(@class, 'css-175oi2r') and .//span[text()='Next']]"))
+        )
+        next_button.click()
+        print("clicked")
     except Exception as e:
         # Print the error message for debugging
         print(f"Error: Could not click the 'Next' button - {str(e)}")

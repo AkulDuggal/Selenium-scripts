@@ -14,8 +14,8 @@ from Functions import (
     click_element_by_xpath,
     #choose_type,
     #next_button_for_cleaning1,
-    date_selection,
-    final_button_chore,
+    #date_selection,
+    #final_button_chore,
     add_ons,
     final_next_cleaning,
     promocode,
@@ -33,7 +33,9 @@ from chores_functions import(
     second_next_button,
     choose_type,
     cleaning_popup_button,
-    next_button_for_cleaning1
+    next_button_for_cleaning1,
+    date_selection,
+    final_button_chore
 )
 
 def main():
@@ -60,23 +62,14 @@ def main():
         cleaning_popup_button(driver) # ADD THIS TO THE ABOVE FUNCTION LATER
         time.sleep(2)
         next_button_for_cleaning1(driver)
-        
-
-
+        time.sleep(2)
+        date_selection(driver, 30)
+        time.sleep(4)
+        final_button_chore(driver)  #work on this
+        #second_next_button(driver) 
 
         '''
-        
-        time.sleep(2)
-        
-        
-        
-        
-        
-        
-        next_button_for_cleaning1(driver)
-        date_selection(driver, 31)
-        time.sleep(3)
-        final_button_chore(driver) #change name to a commonn name.
+         #change name to a commonn name.
         add_ons(driver) #MAKES IT COMPULSARY, MAKE IT THAT ITS A CHOICE
         final_next_cleaning(driver)
         #FINAL CHECKOUT SCREEN
