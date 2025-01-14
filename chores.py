@@ -1,21 +1,25 @@
 import time
-from Functions import (
+from chores_functions import(
     initialize_driver,
     enter_info,
     click_service_by_text,
     change_bedroom_bathroom,
     change_unit_number,
     click_next_button,
+    second_next_button,
     choose_type,
+    cleaning_popup_button,
+    date_selection,
+    final_button_chore
+)
+from Functions import (
     second_next_button_chores,
     selecting_chores,
-    second_next_button,
     date_selection,
     checkout_button,
     promocode,
     final_button_chore,
-    chores_popup_button,
-    
+    #chores_popup_button,
     
 )
 
@@ -29,7 +33,8 @@ def main():
         click_next_button(driver)
         choose_type(driver,'single')
         time.sleep(2)
-        chores_popup_button(driver) #this is not working, hence flow is incomplete
+        cleaning_popup_button(driver)
+        #chores_popup_button(driver) #this is not working, hence flow is incomplete
         second_next_button_chores(driver)
         selecting_chores(driver)
         second_next_button(driver)

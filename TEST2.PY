@@ -16,7 +16,7 @@ from Functions import (
     #next_button_for_cleaning1,
     #date_selection,
     #final_button_chore,
-    add_ons,
+    #add_ons,
     final_next_cleaning,
     promocode,
     final_button_cleaning   
@@ -35,7 +35,9 @@ from chores_functions import(
     cleaning_popup_button,
     next_button_for_cleaning1,
     date_selection,
-    final_button_chore
+    final_button_chore, #remove if not used
+    last_button,
+    add_ons
 )
 
 def main():
@@ -64,14 +66,15 @@ def main():
         next_button_for_cleaning1(driver)
         time.sleep(2)
         date_selection(driver, 30)
-        time.sleep(4)
-        final_button_chore(driver)  #work on this
-        #second_next_button(driver) 
+        time.sleep(2)
+        next_button_for_cleaning1(driver)
+        time.sleep(2)
+        add_ons(driver)
+        time.sleep(2)
+        last_button(driver)
+        time.sleep(2)
 
         '''
-         #change name to a commonn name.
-        add_ons(driver) #MAKES IT COMPULSARY, MAKE IT THAT ITS A CHOICE
-        final_next_cleaning(driver)
         #FINAL CHECKOUT SCREEN
         #promocode(driver,'OFF') the service fee box is glitching here.
         final_button_cleaning(driver)'''

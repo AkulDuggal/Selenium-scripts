@@ -101,7 +101,7 @@ def change_unit_number(driver, unit_number):
     unit_number_field.send_keys(Keys.CONTROL + "a")  
     unit_number_field.send_keys(unit_number)
 
-#fIRST NEXT BUTTON
+#FIRST NEXT BUTTON
 def click_next_button(driver):
     next_button = WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((By.XPATH, "//div[contains(text(),'Next')]"))
@@ -171,45 +171,42 @@ def choose_type(driver,type):
 
 #THIS SHOULD CLICK OK FOR CLEANING POPUP
 def cleaning_popup_button(driver):
-    time.sleep(2)
     try:
         okay_button = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//button[@data-testid='button']")))
         okay_button.click()
+        print("this is from popup function")
 
     except ElementClickInterceptedException:
         print("Element click intercepted by popup. Attempting to close popup...")
     
+# This clicks the next button 
 def next_button_for_cleaning1(driver):
+    script = """
+const divs = document.querySelectorAll('div');
+divs.forEach(div => {
+  if (div.textContent.trim() === 'Next') {
+    div.click();
+  }
+});
+"""
+    driver.execute_script(script)
+    print("function ended, button clicked")
 
-    try:
-        time.sleep(2)  # Consider replacing this with an explicit wait
-
-        # Wait for the "Next" button to be clickable
-        standard = WebDriverWait(driver, 10).until(
-            EC.element_to_be_clickable((By.XPATH, "(//div[@class='css-175oi2r r-1i6wzkk r-lrvibr r-1loqt21 r-1otgn73 r-1awozwy r-1wtzoqk r-cayec9 r-1fuqb1j r-1yadl64 r-18u37iz r-1cmwbt1 r-1777fci r-6dt33c r-ywh0we r-284m6k r-iyfy8q'])[3]"))
-        )
-        standard.click()
-    
-    except Exception as e:
-        # Print the error message for debugging
-        print(f"Error: Could not click the 'Next' button - {str(e)}")
-
-        # Raise the exception so the script does not proceed silently
-        raise Exception("Failed to click the 'Next' button. Check if it's present and clickable.")
-    
+#this selects the date according to mentioned date
 def date_selection(driver,index):
-    # Construct the dynamic XPath with the provided index
+   
     xpath = f"(//div[@class='css-175oi2r r-1awozwy r-13awgt0'])[{index}]"
     
-    # Wait for the element to be clickable
+    
     div_element = WebDriverWait(driver, 10).until(
         EC.element_to_be_clickable((By.XPATH, xpath))
     )
     
-    # Click the located element
+    
     div_element.click()
     print(f"Clicked the div element at index {index}")
 
+#this will click checkout, change name for cleaning and chores
 def final_button_chore(driver):
     '''done = WebDriverWait(driver,10).until(
         EC.element_to_be_clickable((By.XPATH,"//div[contains(text(),'Next')]")) #18th DECEMBER..CHANGED FRO CLEANING , CHECK CHORES
@@ -223,8 +220,39 @@ def final_button_chore(driver):
         next_button.click()
         print("clicked")
     except Exception as e:
-        # Print the error message for debugging
+        
         print(f"Error: Could not click the 'Next' button - {str(e)}")
-
-        # Raise the exception so the script does not proceed silently
         raise Exception("Failed to click the 'Next' button. Check if it's present and clickable.")
+    
+
+def add_ons(driver):
+        standard = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.XPATH, "(//div[@class='css-175oi2r r-1uavh4e r-42olwf r-z2wwpe r-rs99b7 r-5oul0u r-w7s2jr r-1qhn6m8 r-eoizbr'])[8]"))
+            )     
+        standard.click() 
+        print("first addon selected")  
+        
+        standard = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.XPATH, "(//div[@class='css-175oi2r r-1uavh4e r-42olwf r-z2wwpe r-rs99b7 r-5oul0u r-w7s2jr r-1qhn6m8 r-eoizbr'])[9]"))
+            ) 
+        standard.click()
+        print("second addon added")
+
+        standard = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.XPATH, "(//div[@class='css-175oi2r r-1uavh4e r-42olwf r-z2wwpe r-rs99b7 r-5oul0u r-w7s2jr r-1qhn6m8 r-eoizbr'])[10]"))
+            ) 
+        standard.click()
+        print("third addon added")
+
+def last_button(driver):
+    script = """
+const nextButton = document.querySelector('div.css-175oi2r.r-1i6wzkk.r-lrvibr.r-1loqt21.r-1otgn73.r-1awozwy.r-udypu6.r-cayec9.r-18c69zk.r-1yadl64.r-18u37iz.r-1cmwbt1.r-1777fci.r-ytbthy.r-284m6k.r-iyfy8q span.css-1jxf684.r-fdjqy7');
+if (nextButton) {
+  nextButton.click();
+} else {
+  console.log("Next button not found!");
+}
+"""
+
+# Execute the JavaScript
+    driver.execute_script(script)

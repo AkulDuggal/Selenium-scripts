@@ -1,6 +1,14 @@
-#This is standard cleaning flow
+#This is standard cleaning flow ...UPDATED ON 13TH JAN 
 import time
 from Functions import (
+    click_element_by_xpath,
+    add_ons,
+    final_next_cleaning,
+    promocode,
+    final_button_cleaning
+)
+
+from chores_functions import (
     initialize_driver,
     enter_info,
     #click_cleaning_service,
@@ -11,16 +19,11 @@ from Functions import (
     service_selection,
     second_next_button,
     click_service_by_text,
-    click_element_by_xpath,
     choose_type,
     next_button_for_cleaning1,
     date_selection,
     final_button_chore,
-    add_ons,
-    final_next_cleaning,
-    promocode,
-    final_button_cleaning
-    
+    cleaning_popup_button
     
 )
 
@@ -36,9 +39,11 @@ def main():
         change_bedroom_bathroom(driver, 1, 1)
         click_next_button(driver)
         click_skip_button(driver)
-        service_selection(driver)
+        service_selection(driver,"Standard")
         second_next_button(driver)
         choose_type(driver,'single')
+        time.sleep(2)
+        cleaning_popup_button(driver)
         next_button_for_cleaning1(driver)
         date_selection(driver, 31)
         time.sleep(3)
