@@ -30,7 +30,7 @@ def main():
         time.sleep(6)
         click_service_by_text(driver,'Cleaning')
         time.sleep(1)
-        change_bedroom_bathroom(driver, 4, 2)
+        change_bedroom_bathroom(driver, 1, 1)
         change_unit_number(driver, '4')
         time.sleep(2)
         click_next_button(driver)
@@ -51,7 +51,7 @@ def main():
         time.sleep(2)
         next_button_for_cleaning1(driver)
         time.sleep(2)
-        add_ons(driver) #CHECK THIS , GIVING PROBLEM
+        #add_ons(driver) #CHECK THIS , GIVING PROBLEM
         time.sleep(2)
         last_next_button(driver)
         time.sleep(2)
