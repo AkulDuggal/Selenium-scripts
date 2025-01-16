@@ -1,26 +1,5 @@
-#This is standard cleaning edit flow,  THIS BEFORE ADDING IN MAIN FILE NAMED: Cleaning.py
+#This is chores cleaning edit flow, testing here before addin to main file called chores.py
 import time
-from Functions import (
-    #initialize_driver,
-    #enter_info,
-    #click_cleaning_service,
-    #change_bedroom_bathroom,
-    #change_unit_number,
-    #click_next_button,
-    #click_skip_button,
-    #service_selection,
-    #second_next_button,
-    #click_service_by_text,
-    click_element_by_xpath,
-    #choose_type,
-    #next_button_for_cleaning1,
-    #date_selection,
-    #final_button_chore,
-    #add_ons,
-    final_next_cleaning,
-    promocode,
-    final_button_cleaning   
-)
 from chores_functions import(
     initialize_driver,
     enter_info,
@@ -36,8 +15,12 @@ from chores_functions import(
     next_button_for_cleaning1,
     date_selection,
     final_button_chore, #remove if not used
-    last_button,
-    add_ons
+    last_next_button,
+    add_ons,
+    checkout,
+    pro_tip,
+    submit,
+    check
 )
 
 def main():
@@ -65,22 +48,23 @@ def main():
         time.sleep(2)
         next_button_for_cleaning1(driver)
         time.sleep(2)
-        date_selection(driver, 30)
+        date_selection(driver, 29)
         time.sleep(2)
         next_button_for_cleaning1(driver)
         time.sleep(2)
-        add_ons(driver)
+        add_ons(driver) #CHECK THIS , GIVING PROBLEM
         time.sleep(2)
-        last_button(driver)
+        last_next_button(driver)
         time.sleep(2)
+        pro_tip(driver,1)
+        time.sleep(2)
+        checkout(driver)
+        time.sleep(2)
+        submit(driver)
+        time.sleep(2)
+        check(driver)
+        print("flow complete")
 
-        '''
-        #FINAL CHECKOUT SCREEN
-        #promocode(driver,'OFF') the service fee box is glitching here.
-        final_button_cleaning(driver)'''
-
-
-        # To be able to click the add instruction button 
 
         time.sleep(10)
     except Exception as e:

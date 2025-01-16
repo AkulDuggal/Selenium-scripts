@@ -1,30 +1,25 @@
-#This is standard cleaning flow ...UPDATED ON 13TH JAN 
+#This is standard cleaning flow ...UPDATED ON 16TH JAN 
 import time
-from Functions import (
-    click_element_by_xpath,
-    add_ons,
-    final_next_cleaning,
-    promocode,
-    final_button_cleaning
-)
-
-from chores_functions import (
+from cleaning_functions import(
     initialize_driver,
     enter_info,
-    #click_cleaning_service,
+    click_service_by_text,
     change_bedroom_bathroom,
     change_unit_number,
     click_next_button,
     click_skip_button,
     service_selection,
     second_next_button,
-    click_service_by_text,
     choose_type,
+    cleaning_popup_button,
     next_button_for_cleaning1,
     date_selection,
-    final_button_chore,
-    cleaning_popup_button
-    
+    last_next_button,
+    add_ons,
+    checkout,
+    pro_tip,
+    submit,
+    check
 )
 
 def main():
@@ -32,30 +27,43 @@ def main():
 
     try: 
         enter_info(driver, 'aduggal+gcp2@amenify.com', 'Akulduggal46@123456')
-        time.sleep(1)
+        time.sleep(6)
         click_service_by_text(driver,'Cleaning')
+        time.sleep(1)
+        change_bedroom_bathroom(driver, 4, 2)
+        change_unit_number(driver, '4')
         time.sleep(2)
-        change_unit_number(driver, '3')
-        change_bedroom_bathroom(driver, 1, 1)
         click_next_button(driver)
-        click_skip_button(driver)
-        service_selection(driver,"Standard")
-        second_next_button(driver)
-        choose_type(driver,'single')
         time.sleep(2)
-        cleaning_popup_button(driver)
+        click_skip_button(driver)
+        time.sleep(2)
+        service_selection(driver,"Standard")
+        time.sleep(2)
+        second_next_button(driver)
+        time.sleep(2)
+        choose_type(driver,'single')  
+        time.sleep(2)
+        cleaning_popup_button(driver) # ADD THIS TO THE ABOVE FUNCTION LATER
+        time.sleep(2)
         next_button_for_cleaning1(driver)
-        date_selection(driver, 31)
-        time.sleep(3)
-        final_button_chore(driver) #change name to a commonn name.
-        add_ons(driver) #MAKES IT COMPULSARY, MAKE IT THAT ITS A CHOICE
-        final_next_cleaning(driver)
-        #FINAL CHECKOUT SCREEN
-        #promocode(driver,'OFF') the service fee box is glitching here.
-        final_button_cleaning(driver)
+        time.sleep(2)
+        date_selection(driver, 29)
+        time.sleep(2)
+        next_button_for_cleaning1(driver)
+        time.sleep(2)
+        add_ons(driver) #CHECK THIS , GIVING PROBLEM
+        time.sleep(2)
+        last_next_button(driver)
+        time.sleep(2)
+        pro_tip(driver,1)
+        time.sleep(2)
+        checkout(driver)
+        time.sleep(2)
+        submit(driver)
+        time.sleep(2)
+        check(driver)
+        print("flow complete")
 
-
-        # To be able to click the add instruction button 
 
         time.sleep(10)
     except Exception as e:

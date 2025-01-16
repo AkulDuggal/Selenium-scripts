@@ -244,7 +244,7 @@ def add_ons(driver):
         standard.click()
         print("third addon added")
 
-def last_button(driver):
+def last_next_button(driver):
     script = """
 const nextButton = document.querySelector('div.css-175oi2r.r-1i6wzkk.r-lrvibr.r-1loqt21.r-1otgn73.r-1awozwy.r-udypu6.r-cayec9.r-18c69zk.r-1yadl64.r-18u37iz.r-1cmwbt1.r-1777fci.r-ytbthy.r-284m6k.r-iyfy8q span.css-1jxf684.r-fdjqy7');
 if (nextButton) {
@@ -256,3 +256,68 @@ if (nextButton) {
 
 # Execute the JavaScript
     driver.execute_script(script)
+
+def checkout(driver):
+    button=WebDriverWait(driver,10).until(
+        EC.element_to_be_clickable((By.XPATH,"(//div[contains(text(),'Confirm')])[1]"))
+    )
+    button.click()
+    print("checkout complete")
+    time.sleep(10)
+
+
+def pro_tip(driver, tip):
+    
+    button=WebDriverWait(driver,10).until(
+        EC.element_to_be_clickable((By.XPATH,"(//span[normalize-space()='Service Pro Tip:'])[1]"))
+    )
+    button.click()
+    print("pro tip clicked")
+    time.sleep(5)
+    if tip>0:
+        button=WebDriverWait(driver,10).until(
+            EC.element_to_be_clickable((By.XPATH,f"(//div[@class='css-175oi2r r-1i6wzkk r-lrvibr r-1loqt21 r-1otgn73 r-1awozwy r-a1yn9n r-1mwlp6a r-1777fci r-8dgmk1 r-18tzken'])[{tip}]"))
+        )
+        button.click()
+        print("Tips added clicked")
+        time.sleep(5)
+
+        tips_submit=WebDriverWait(driver,10).until(
+            EC.element_to_be_clickable((By.XPATH,"(//div[contains(text(),'Save Tip')])[1]"))
+        )
+        tips_submit.click()
+        print("clicked button")
+        time.sleep(5)
+
+    else:
+        button=WebDriverWait(driver,10).until(
+            EC.element_to_be_clickable((By.XPATH,"(//div[contains(text(),'Close')])[1]"))
+        )
+        button.click()
+        print("closed pro tip page")
+        time.sleep(10)
+
+def submit(driver):
+    '''input_field = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.CSS_SELECTOR, "input[placeholder=' '][value='yes']"))  #check how to correct this, this wont allow change in instructions
+        )
+
+    input_field.clear()
+    input_field.send_keys("from selenium")
+
+    print("Input value changed successfully!")'''
+    time.sleep(5)
+    submit_button=WebDriverWait(driver,10).until(
+        EC.element_to_be_clickable((By.XPATH,"(//div[contains(text(),'Submit to continue')])[1]"))
+    )
+    submit_button.click()
+    print("button clicked")
+    time.sleep(5)
+
+def check(driver):
+    button=WebDriverWait(driver,10).until(
+        EC.element_to_be_clickable((By.XPATH,"(//button[@role='button'])[3]"))
+    )
+    button.click()
+    print("viewing the appointment page")
+    time.sleep(2)
