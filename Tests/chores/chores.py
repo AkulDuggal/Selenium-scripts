@@ -1,5 +1,5 @@
 import time
-from Utils.chores_functions import(
+from Tests.chores.chores_functions import(
     initialize_driver,
     enter_info,
     click_service_by_text,
@@ -12,7 +12,7 @@ from Utils.chores_functions import(
     date_selection,
     final_button_chore
 )
-from Utils.Functions import (
+from utils.Functions import (
     second_next_button_chores,
     selecting_chores,
     date_selection,

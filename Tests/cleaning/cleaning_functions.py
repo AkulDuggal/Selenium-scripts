@@ -208,7 +208,7 @@ def date_selection(driver,index):
     div_element.click()
     print(f"Clicked the div element at index {index}")
 
-#this will click checkout, change name for cleaning and chores
+#REMOVE IF NOT USED
 def final_button_chore(driver):
     '''done = WebDriverWait(driver,10).until(
         EC.element_to_be_clickable((By.XPATH,"//div[contains(text(),'Next')]")) #18th DECEMBER..CHANGED FRO CLEANING , CHECK CHORES

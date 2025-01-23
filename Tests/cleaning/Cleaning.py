@@ -1,26 +1,6 @@
 #This is standard cleaning flow ...UPDATED ON 16TH JAN 
 import time
-from Utils.cleaning_functions import(
-    initialize_driver,
-    enter_info,
-    click_service_by_text,
-    change_bedroom_bathroom,
-    change_unit_number,
-    click_next_button,
-    click_skip_button,
-    service_selection,
-    second_next_button,
-    choose_type,
-    cleaning_popup_button,
-    next_button_for_cleaning1,
-    date_selection,
-    last_next_button,
-    add_ons,
-    checkout,
-    pro_tip,
-    submit,
-    check
-)
+from Tests.cleaning.cleaning_functions import *
 
 def main():
     driver = initialize_driver('sign-in')

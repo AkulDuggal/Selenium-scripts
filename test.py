@@ -14,7 +14,7 @@ import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from Utils.cleaning_functions import(
+from Tests.cleaning.cleaning_functions import(
     initialize_driver,
     enter_info,
     click_service_by_text,
@@ -40,7 +40,7 @@ def main():
     driver = initialize_driver('sign-in')
 
     try: 
-        enter_info(driver, 'aduggal+gcp2@amenify.com', 'Akulduggal46@123456')
+        enter_info(driver)
         time.sleep(6)
         click_service_by_text(driver,'Cleaning')
         time.sleep(1)
