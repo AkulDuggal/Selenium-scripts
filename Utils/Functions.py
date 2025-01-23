@@ -8,6 +8,13 @@ from selenium.webdriver.support.select import Select
 from selenium.common.exceptions import TimeoutException, ElementClickInterceptedException
 import time
 from selenium.webdriver.common.action_chains import ActionChains
+import json
+
+with open("config.json", "r") as file:
+    config = json.load(file)
+
+EMAIL = config["email"]
+PASSWORD = config["password"]
 
 def initialize_driver(access_type):
     driver = webdriver.Chrome()
@@ -18,8 +25,8 @@ def initialize_driver(access_type):
     else:
         driver.quit()
     return driver
-
-def enter_info(driver, email, password):
+# TO SELF, CHANGE FOR SIGNUP .. 
+def enter_info(driver):
     if "sign-up" in driver.current_url:
         Messagebox=WebDriverWait(driver,10).until(
         EC.element_to_be_clickable((By.XPATH,"(//div[@class='css-175oi2r r-1phboty'])[2]"))
@@ -32,18 +39,18 @@ def enter_info(driver, email, password):
     )
     input_field_email = input_fields[0]
     input_field_email.clear()
-    input_field_email.send_keys(email)
+    input_field_email.send_keys(EMAIL)
 
     input_field_password = input_fields[1]
     input_field_password.clear()
-    input_field_password.send_keys(password)
+    input_field_password.send_keys(PASSWORD)
 
     # Make decisions based on the current URL
     current_url = driver.current_url
     if 'sign-in' in current_url:
         print("Navigated to the Sign-In page.")
         sign_in_next = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.XPATH, "//div[@class='css-175oi2r r-1phboty']"))
+        EC.presence_of_element_located((By.XPATH, "(//div[contains(text(),'Sign in')])[1]"))
         )
         sign_in_next.click()
 

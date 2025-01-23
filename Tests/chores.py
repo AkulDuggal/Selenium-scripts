@@ -1,5 +1,5 @@
 import time
-from chores_functions import(
+from Utils.chores_functions import(
     initialize_driver,
     enter_info,
     click_service_by_text,
@@ -12,7 +12,7 @@ from chores_functions import(
     date_selection,
     final_button_chore
 )
-from Functions import (
+from Utils.Functions import (
     second_next_button_chores,
     selecting_chores,
     date_selection,
@@ -26,7 +26,7 @@ from Functions import (
 def main():
     driver=initialize_driver('sign-in')
     try:
-        enter_info(driver,'aduggal+gcp2@amenify.com', 'Akulduggal46@123456')
+        enter_info(driver)
         click_service_by_text(driver,'Chores')
         change_unit_number(driver, '1')
         change_bedroom_bathroom(driver, 2, 3)

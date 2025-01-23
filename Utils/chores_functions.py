@@ -1,4 +1,4 @@
-#DIVIDE CLEANING/CHORES FUNCTION FOR READABILITY. 
+# PURPOSE OF THIS FILE IS TO FIX CHORES FUNCTION AND STANDARDIZE THE FUNCTIONS LIMITED TO CHORES ONLY
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
@@ -9,6 +9,13 @@ from selenium.webdriver.support.select import Select
 from selenium.common.exceptions import TimeoutException, ElementClickInterceptedException
 import time
 from selenium.webdriver.common.action_chains import ActionChains
+import json
+
+with open("config.json", "r") as file:
+    config = json.load(file)
+
+EMAIL = config["email"]
+PASSWORD = config["password"]
 
 #THIS IS FOR OPENING THE WINDOW WITH AMENIFY STAGE
 def initialize_driver(access_type):
@@ -23,7 +30,7 @@ def initialize_driver(access_type):
 
 
 #THIS IS FOR LOGIN AND SIGNUP
-def enter_info(driver, email, password):
+def enter_info(driver):
     if "sign-up" in driver.current_url:
         Messagebox=WebDriverWait(driver,10).until(
         EC.element_to_be_clickable((By.XPATH,"(//div[@class='css-175oi2r r-1phboty'])[2]"))
@@ -36,11 +43,11 @@ def enter_info(driver, email, password):
     )
     input_field_email = input_fields[0]
     input_field_email.clear()
-    input_field_email.send_keys(email)
+    input_field_email.send_keys(EMAIL)
 
     input_field_password = input_fields[1]
     input_field_password.clear()
-    input_field_password.send_keys(password)
+    input_field_password.send_keys(PASSWORD)
 
     # Make decisions based on the current URL
     current_url = driver.current_url
@@ -109,32 +116,6 @@ def click_next_button(driver):
     next_button.click()
     print("Moved to next page, from first click function")
 
-#THIS IS THE SKIP BUTTON TO MOVE AHEAD
-def click_skip_button(driver):
-    next_button = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.XPATH, "//div[contains(text(),'Skip')]"))
-    )
-    next_button.click()
-    print("Moved to next page, from skip click function")
-
-#THIS SELECTS SERVICE TYPE
-def service_selection(driver,service_text):
-    standard = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.XPATH, f"//div[normalize-space()='{service_text}']"))
-    )
-    standard.click()
-    print(f"Clicked '{service_text}' service")
-
-#CLICKS THE SECOND NEXT BUTTON
-def second_next_button(driver): 
-    time.sleep(1)   
-    standard = WebDriverWait(driver, 10).until(
-        EC.element_to_be_clickable((By.XPATH, "(//span[normalize-space()='Next'])[1]"))
-    )
-    #(//span[normalize-space()='Next'])[1]
-    time.sleep(1)
-    standard.click()
-    print("Clicked next button from the second function")
 
 #THIS FUNCTION CHOOSES ONE TIME OR SUB
 def choose_type(driver,type):
@@ -170,7 +151,7 @@ def choose_type(driver,type):
         driver.quit()
 
 #THIS SHOULD CLICK OK FOR CLEANING POPUP
-def cleaning_popup_button(driver):
+def chores_popup_button(driver):
     try:
         okay_button = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//button[@data-testid='button']")))
         okay_button.click()
@@ -180,7 +161,7 @@ def cleaning_popup_button(driver):
         print("Element click intercepted by popup. Attempting to close popup...")
     
 # This clicks the next button 
-def next_button_for_cleaning1(driver):
+def next_button_for_chores(driver):
     script = """
 const divs = document.querySelectorAll('div');
 divs.forEach(div => {
@@ -321,3 +302,26 @@ def check(driver):
     button.click()
     print("viewing the appointment page")
     time.sleep(2)
+
+
+def checklist(driver):
+    items=WebDriverWait(driver,10).until(
+        EC.element_to_be_clickable((By.XPATH,"(//div[@class='css-175oi2r r-1uavh4e r-42olwf r-z2wwpe r-rs99b7 r-5oul0u r-w7s2jr r-1qhn6m8 r-eoizbr'])[4]"))
+        )
+    items.click()
+    print("added to checklist")
+
+    '''item=WebDriverWait(driver,10).until(
+        EC.element_to_be_clickable((By.XPATH,"(//div[@class='css-175oi2r r-1uavh4e r-42olwf r-z2wwpe r-rs99b7 r-5oul0u r-w7s2jr r-1qhn6m8 r-eoizbr'])[5]"))
+        )
+    item.click()
+    print("added to checklist")
+
+    item=WebDriverWait(driver,10).until(
+        EC.element_to_be_clickable((By.XPATH,"(//div[@class='css-175oi2r r-1uavh4e r-42olwf r-z2wwpe r-rs99b7 r-5oul0u r-w7s2jr r-1qhn6m8 r-eoizbr'])[6]"))
+        )
+    item.click()
+    print("added to checklist")'''
+    time.sleep(2)
+
+    

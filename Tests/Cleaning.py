@@ -1,6 +1,6 @@
 #This is standard cleaning flow ...UPDATED ON 16TH JAN 
 import time
-from cleaning_functions import(
+from Utils.cleaning_functions import(
     initialize_driver,
     enter_info,
     click_service_by_text,
@@ -26,7 +26,7 @@ def main():
     driver = initialize_driver('sign-in')
 
     try: 
-        enter_info(driver, 'aduggal+gcp2@amenify.com', 'Akulduggal46@123456')
+        enter_info(driver)
         time.sleep(6)
         click_service_by_text(driver,'Cleaning')
         time.sleep(1)

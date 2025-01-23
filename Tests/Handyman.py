@@ -9,7 +9,7 @@ import time
 from selenium.webdriver.common.action_chains import ActionChains
 import pyautogui
 
-from Functions import (
+from Utils.Functions import (
     initialize_driver,
     enter_info,
     click_service_by_text,
