@@ -8,7 +8,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
 
 
-from Functions import (
+from Utils.Functions import (
     initialize_driver,
     enter_info
     

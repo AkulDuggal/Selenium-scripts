@@ -5,7 +5,16 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.select import Select
+from selenium.common.exceptions import TimeoutException, ElementClickInterceptedException
 import time
+from selenium.webdriver.common.action_chains import ActionChains
+import json
+
+with open("config.json", "r") as file:
+    config = json.load(file)
+
+EMAIL = config["email"]
+PASSWORD = config["password"]
 
 def initialize_driver(access_type):
     driver = webdriver.Chrome()
@@ -16,25 +25,32 @@ def initialize_driver(access_type):
     else:
         driver.quit()
     return driver
+# TO SELF, CHANGE FOR SIGNUP .. 
+def enter_info(driver):
+    if "sign-up" in driver.current_url:
+        Messagebox=WebDriverWait(driver,10).until(
+        EC.element_to_be_clickable((By.XPATH,"(//div[@class='css-175oi2r r-1phboty'])[2]"))
+    ).click()
+    else: 
+        print("No box to click")
 
-def enter_info(driver, email, password):
     input_fields = WebDriverWait(driver, 10).until(
         EC.presence_of_all_elements_located((By.CSS_SELECTOR, "input[data-testid='text-input-flat']"))
     )
     input_field_email = input_fields[0]
     input_field_email.clear()
-    input_field_email.send_keys(email)
+    input_field_email.send_keys(EMAIL)
 
     input_field_password = input_fields[1]
     input_field_password.clear()
-    input_field_password.send_keys(password)
+    input_field_password.send_keys(PASSWORD)
 
     # Make decisions based on the current URL
     current_url = driver.current_url
     if 'sign-in' in current_url:
         print("Navigated to the Sign-In page.")
         sign_in_next = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.XPATH, "//div[@class='css-175oi2r r-1phboty']"))
+        EC.presence_of_element_located((By.XPATH, "(//div[contains(text(),'Sign in')])[1]"))
         )
         sign_in_next.click()
 
@@ -112,7 +128,7 @@ def service_selection(driver):
 def second_next_button(driver): 
     time.sleep(1)   
     standard = WebDriverWait(driver, 10).until(
-        EC.element_to_be_clickable((By.XPATH, "(//div[@class='css-175oi2r r-1phboty'])[10]"))
+        EC.element_to_be_clickable((By.XPATH, "(//div[@class='css-175oi2r r-1phboty'])[9]"))
     )
     time.sleep(1)
     standard.click()
@@ -150,6 +166,13 @@ def choose_type(driver,type):
             EC.presence_of_element_located((By.XPATH,"//div[contains(text(),'One-time appointment')]"))
         )
         element.click()
+
+        element=WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.XPATH,"(//div[@class='css-175oi2r r-1awozwy r-18u37iz r-1777fci'])[12]"))
+        )
+        element.click()
+
+
     elif type=="multi":
         #need if/else as chores only has 3 sub options for stage.
         if 'cleaning' in current_url:
@@ -222,7 +245,7 @@ def checkout_button(driver):
 def next_button_for_cleaning1(driver):
     time.sleep(2)
     standard= WebDriverWait(driver,10).until(
-        EC.presence_of_element_located((By.XPATH,"(//div[@class='css-175oi2r r-1phboty'])[12]"))
+        EC.presence_of_element_located((By.XPATH,"(//div[@class='css-175oi2r r-1phboty'])[11]"))
     )
     time.sleep(1)
     standard.click()
@@ -265,7 +288,7 @@ def promocode(driver,code):
 
 def final_button_chore(driver):
     done=WebDriverWait(driver,10).until(
-        EC.element_to_be_clickable((By.XPATH,"(//div[@class='css-175oi2r r-1phboty'])[14]"))
+        EC.element_to_be_clickable((By.XPATH,"(//div[@class='css-175oi2r r-1phboty'])[13]")) #18th DECEMBER..CHANGED FRO CLEANING , CHECK CHORES
     )
     done.click()
     print("Chore flow complete")
@@ -290,7 +313,7 @@ def add_ons(driver):
 
 def final_next_cleaning(driver):
     standard = WebDriverWait(driver, 10).until(
-            EC.element_to_be_clickable((By.XPATH, "(//div[@class='css-175oi2r r-1phboty'])[16]"))
+            EC.element_to_be_clickable((By.XPATH, "(//div[@class='css-175oi2r r-1phboty'])[15]"))
         )
     standard.click() 
     time.sleep(1)
@@ -299,7 +322,7 @@ def final_next_cleaning(driver):
 
 def final_button_cleaning(driver):
     done=WebDriverWait(driver,10).until(
-        EC.element_to_be_clickable((By.XPATH,"(//div[@class='css-175oi2r r-1phboty'])[18]"))
+        EC.element_to_be_clickable((By.XPATH,"(//div[@class='css-175oi2r r-1phboty'])[17]"))
     )
     done.click()
     time.sleep(5)
@@ -353,9 +376,20 @@ def amenify_credits(driver, amount,type):
     time.sleep(10)
 
     
-            
+def chores_popup_button(driver):
+    time.sleep(2)
+    try:
+        standard= WebDriverWait(driver,10).until(
+            EC.element_to_be_clickable((By.XPATH,"(//div[@class='css-146c3p1 r-fdjqy7 r-1ifxtd0 r-1un7vkp'])[1]"))
+        )
         
+        standard.click()
+        
+    except ElementClickInterceptedException:
+        print("Element click intercepted by popup. Attempting to close popup...")
 
-
-
+def corner_click(driver):
+    # Use JavaScript to simulate a click at coordinates (0, 0)
+    driver.execute_script("var evt = new MouseEvent('click', {clientX: 100, clientY: 100}); document.elementFromPoint(0, 0).dispatchEvent(evt);")
+    
 
