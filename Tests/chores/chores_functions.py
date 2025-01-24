@@ -174,18 +174,14 @@ divs.forEach(div => {
     print("function ended, button clicked")
 
 #this selects the date according to mentioned date
-def date_selection(driver,index):
-   
-    xpath = f"(//div[@class='css-175oi2r r-1awozwy r-13awgt0'])[{index}]"
-    
+def date_selection(driver,date):
     
     div_element = WebDriverWait(driver, 10).until(
-        EC.element_to_be_clickable((By.XPATH, xpath))
-    )
-    
+        EC.element_to_be_clickable((By.XPATH, f"//div[text()='{date}']"))
+        )
     
     div_element.click()
-    print(f"Clicked the div element at index {index}")
+    print(f"Clicked the div element at index {date}")
 
 #this will click checkout, change name for cleaning and chores
 def final_button_chore(driver):
