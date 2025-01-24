@@ -3,7 +3,7 @@ import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
-from Utils.Functions import (
+from utils.Functions import (
     initialize_driver,
     enter_info,
     amenify_one,
@@ -15,7 +15,7 @@ def main():
     driver = initialize_driver('sign-in')
 
     try: 
-        enter_info(driver, 'aduggal@amenify.com', 'Akulduggal46@123456')
+        enter_info(driver)
         time.sleep(2)
 
         '''amenify_one(driver)
@@ -23,7 +23,8 @@ def main():
         print("Amenify sub bought")
         time.sleep(10)''' # need to find a way to put this in if/else as it only happens onc a month.
 
-        amenify_credits(driver,'50',"Credits") # Choose between Credits/Card
+        amenify_credits(driver,'50',"Card") 
+        amenify_credits(driver,'50',"Credits")
         time.sleep(10)
 
     except Exception as e:

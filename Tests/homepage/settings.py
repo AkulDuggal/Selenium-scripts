@@ -3,41 +3,36 @@ import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
-from Utils.Functions import (
+from utils.Functions import (
     initialize_driver,
-    enter_info,
-    
-    
+    enter_info,  
 )
+def settings(driver):
+    settings=WebDriverWait(driver,10).until(
+        EC.element_to_be_clickable((By.XPATH,"(//button[@role='button'])[4]"))
+    ).click()
+    print("settings button clicked")
 
-def main():
-    driver = initialize_driver('sign-in')
+def setting_one(driver):
+    settings_one=WebDriverWait(driver,10).until(
+        EC.element_to_be_clickable((By.XPATH,"(//div[normalize-space()='Personal information'])[1]"))
+    )
+    settings_one.click()
+    print("first setting clicked")
+    time.sleep(2)
 
-    def settings(driver):
-        settings=WebDriverWait(driver,10).until(
-            EC.element_to_be_clickable((By.XPATH,"(//button[@role='button'])[4]"))
+    settings=WebDriverWait(driver,10).until(
+        EC.element_to_be_clickable((By.XPATH,"(//div[normalize-space()='Update'])[1]"))
         ).click()
-        print("settings button clicked")
+    print("settings updated")
 
-    def setting_one(driver):
-        settings_one=WebDriverWait(driver,10).until(
-            EC.element_to_be_clickable((By.XPATH,"(//div[@class='css-175oi2r r-1awozwy r-18u37iz'])[1]"))
+    settings=WebDriverWait(driver,10).until(
+        EC.element_to_be_clickable((By.XPATH,"(//div[@class='css-146c3p1 r-lrvibr r-1loqt21'])[1]"))
         ).click()
-        print("first setting clicked")
-        time.sleep(2)
-
-        settings=WebDriverWait(driver,10).until(
-            EC.element_to_be_clickable((By.XPATH,"(//div[@class='css-175oi2r r-1phboty r-13qz1uu'])[1]"))
-        ).click()
-        print("settings updated")
-
-        settings=WebDriverWait(driver,10).until(
-            EC.element_to_be_clickable((By.XPATH,"(//div[@class='css-146c3p1 r-lrvibr r-1loqt21'])[1]"))
-        ).click()
-        print("Back to settings")
+    print("Back to settings")
 
     
-    def setting_two(driver):
+def setting_two(driver):
         settings_2=WebDriverWait(driver,10).until(
             EC.element_to_be_clickable((By.XPATH,"(//div[@class='css-175oi2r r-1awozwy r-18u37iz'])[2]"))
         ).click()
@@ -57,7 +52,7 @@ def main():
         print("Back to settings")
 
 
-    def settings_common(driver):
+def settings_common(driver):
         all_elements=WebDriverWait(driver,10).until(
             EC.presence_of_all_elements_located((By.XPATH,"(//div[@class='css-175oi2r r-1awozwy r-18u37iz'])"))
         )
@@ -76,16 +71,17 @@ def main():
         time.sleep(3)
         all_elements[4].click()
 
-
+def main():
+    driver = initialize_driver('sign-in')
 
     try: 
-        enter_info(driver, 'aduggal+nov1@amenify.com', 'Akulduggal46@123456')
+        enter_info(driver)
         time.sleep(5)
 
         #GO TO SETTINGS PAGE
 
         settings(driver)
-        time.sleep(1)
+        time.sleep(4)
         setting_one(driver)
         time.sleep(1)
         setting_two(driver)
