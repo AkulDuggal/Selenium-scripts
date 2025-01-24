@@ -27,7 +27,7 @@ def main():
         time.sleep(2)
         next_button_for_cleaning1(driver)
         time.sleep(2)
-        test_date_selection(driver, 29)
+        date_selection(driver, 29)
         time.sleep(2)
         next_button_for_cleaning1(driver)
         time.sleep(2)

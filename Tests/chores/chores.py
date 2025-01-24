@@ -22,6 +22,7 @@ def main():
         checkout(driver)
         time.sleep(2)
         submit(driver)
+        check(driver)
         
         #promocode(driver,'OFF')
         time.sleep(10)
