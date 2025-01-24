@@ -324,4 +324,107 @@ def checklist(driver):
     print("added to checklist")'''
     time.sleep(2)
 
+
+def chores_popup_button(driver):
+    try:
+        okay_button = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//button[@data-testid='button']")))
+        okay_button.click()
+        print("this is from popup function")
+
+    except ElementClickInterceptedException:
+        print("Element click intercepted by popup. Attempting to close popup...")
+
+
+def second_next_button_chores(driver): 
+    script = """
+const divs = document.querySelectorAll('div');
+divs.forEach(div => {
+  if (div.textContent.trim() === 'Next') {
+    div.click();
+  }
+});
+"""
+    driver.execute_script(script)
+    print("function ended, button clicked")
+
+
+def selecting_chores(driver):
+    print("function started")
+    standard = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.XPATH, "//div[@tabindex='0' and contains(@class, 'css-175oi2r')]//div[@dir='auto' and text()='Deep Clean Bath']"))
+        )
+    standard.click()
+
+    standard = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.XPATH, "//div[@tabindex='0' and contains(@class, 'css-175oi2r')]//div[@dir='auto' and text()='Change Sheets']"))
+        )
+    standard.click()
+
+    standard = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.XPATH, "//div[@tabindex='0' and contains(@class, 'css-175oi2r')]//div[@dir='auto' and text()='Clean the Floors']"))
+        )
+    standard.click()
+
+
+    print("function ended")
+
+    #print(f"Number of elements found: {len(standard)}") 
     
+    
+def checkout_button(driver): 
+    time.sleep(1)   
+    standard = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.XPATH,"//div[contains(text(),'Checkout')]"))
+    )
+    time.sleep(1)
+    standard.click()
+    print("moved to next page")
+
+def pro_tip(driver, tip):
+    
+    button=WebDriverWait(driver,10).until(
+        EC.element_to_be_clickable((By.XPATH,"(//span[normalize-space()='Service Pro Tip:'])[1]"))
+    )
+    button.click()
+    print("pro tip clicked")
+    time.sleep(5)
+    if tip>0:
+        button = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.XPATH, "//div[@class='css-146c3p1 r-fdjqy7'][normalize-space()='0%']"))
+            )
+        button.click()
+        print("Tips added clicked")
+        time.sleep(2)
+
+        tips_submit=WebDriverWait(driver,10).until(
+            EC.element_to_be_clickable((By.XPATH,"(//div[contains(text(),'Save Tip')])[1]"))
+        )
+        tips_submit.click()
+        print("clicked button")
+        time.sleep(5)
+
+    else:
+        button=WebDriverWait(driver,10).until(
+            EC.element_to_be_clickable((By.XPATH,"(//div[contains(text(),'Close')])[1]"))
+        )
+        button.click()
+        print("closed pro tip page")
+        time.sleep(10)
+
+
+def checkout(driver):
+    button=WebDriverWait(driver,10).until(
+        EC.element_to_be_clickable((By.XPATH,"(//div[contains(text(),'Confirm')])[1]"))
+    )
+    button.click()
+    print("checkout complete")
+    time.sleep(10)
+
+def submit(driver):
+    submit_button=WebDriverWait(driver,10).until(
+        EC.element_to_be_clickable((By.XPATH,"(//div[contains(text(),'Submit to continue')])[1]"))
+    )
+    submit_button.click()
+    print("button clicked")
+    time.sleep(5)
+

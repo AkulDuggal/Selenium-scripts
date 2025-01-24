@@ -1,55 +1,29 @@
 import time
-from Tests.chores.chores_functions import(
-    initialize_driver,
-    enter_info,
-    click_service_by_text,
-    change_bedroom_bathroom,
-    change_unit_number,
-    click_next_button,
-    second_next_button,
-    choose_type,
-    cleaning_popup_button,
-    date_selection,
-    final_button_chore
-)
-from utils.Functions import (
-    second_next_button_chores,
-    selecting_chores,
-    date_selection,
-    checkout_button,
-    promocode,
-    final_button_chore,
-    #chores_popup_button,
+from .chores_functions import *
     
-)
-
 def main():
     driver=initialize_driver('sign-in')
     try:
         enter_info(driver)
+        time.sleep(2)
         click_service_by_text(driver,'Chores')
         change_unit_number(driver, '1')
         change_bedroom_bathroom(driver, 2, 3)
         click_next_button(driver)
         choose_type(driver,'single')
         time.sleep(2)
-        cleaning_popup_button(driver)
-        #chores_popup_button(driver) #this is not working, hence flow is incomplete
+        chores_popup_button(driver)
         second_next_button_chores(driver)
-        selecting_chores(driver)
-        second_next_button(driver)
-        date_selection(driver, 30) #change according to the date to be selected 
+        selecting_chores(driver) #hard coded names, fix later
+        second_next_button_chores(driver)
+        date_selection(driver, 30)
         checkout_button(driver)
-        promocode(driver,'OFF')
-        final_button_chore(driver)
+        pro_tip(driver,1) #hard coded the value in xpath
+        checkout(driver)
+        time.sleep(2)
+        submit(driver)
         
-
-        # To be able to click the add instruction button 
-        
-        
-        
-
-
+        #promocode(driver,'OFF')
         time.sleep(10)
 
     except Exception as e:

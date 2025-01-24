@@ -1,6 +1,6 @@
 #This is standard cleaning flow ...UPDATED ON 16TH JAN 
 import time
-from Tests.cleaning.cleaning_functions import *
+from .cleaning_functions import *
 
 def main():
     driver = initialize_driver('sign-in')
