@@ -8,8 +8,9 @@ from selenium.webdriver.support.select import Select
 import time
 from selenium.webdriver.common.action_chains import ActionChains
 import pyautogui
+from selenium.common.exceptions import TimeoutException, ElementClickInterceptedException
 
-from Utils.Functions import (
+from utils.Functions import (
     initialize_driver,
     enter_info,
     click_service_by_text,
@@ -17,7 +18,43 @@ from Utils.Functions import (
   
 )
 
+def cleaning_popup_button(driver):
+    try:
+        okay_button = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//button[@swal-button='fdprocessedid']")))
+        okay_button.click()
+        print("this is from popup function")
 
+    except ElementClickInterceptedException:
+        print("Element click intercepted by popup. Attempting to close popup...")
+
+
+def next_button_for_cleaning1(driver):
+    script = """
+setTimeout(() => {
+  document.querySelectorAll('.swal-button.swal-button--confirm').forEach(button => {
+    if (button.innerText.trim() === 'OK') {
+      button.click();
+      console.log('Button clicked');
+    }
+  });
+}, 500); // Delay to ensure the button is present
+"""
+    driver.execute_script(script)
+    print("Function ended, button clicked")
+
+
+
+def trying(driver):
+    WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.CLASS_NAME, "swal-modal"))
+    )
+
+    # Wait for the OK button and click it
+    ok_button = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.XPATH, "//button[contains(@class, 'swal-button') and contains(@class, 'swal-button--confirm') and text()='OK']"))
+    )
+    ok_button.click()
+    print("OK button clicked successfully.")
 
 def perform_mouse_actions(driver, *coordinates):
     """
@@ -42,7 +79,7 @@ def main():
     driver = initialize_driver('sign-in')
 
     try: 
-        enter_info(driver, 'aduggal+nov1@amenify.com', 'Akulduggal46@123456')
+        enter_info(driver)
         time.sleep(2)
 
         #HANDYMAN TESTING
@@ -51,8 +88,7 @@ def main():
         click_service_by_text(driver,'Handyman')
         time.sleep(5)
 
-        perform_mouse_actions(driver, (10, 10), (220, 220))
-
+        trying(driver)
         print("pop up closed")
 
         '''done=WebDriverWait(driver,10).until(

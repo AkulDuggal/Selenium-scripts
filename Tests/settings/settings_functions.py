@@ -1,3 +1,4 @@
+#This file contains all the functions for settings flow .
 from selenium.webdriver.support import expected_conditions as EC
 import time
 from selenium.webdriver.common.by import By
@@ -121,7 +122,7 @@ def fifth_setting(driver):
     )
     switch.click()
     time.sleep(2)
-
+    #find a case where the popup needs to be clicked, otherwise avoid
     '''okay_button = WebDriverWait(driver, 10).until(
         EC.element_to_be_clickable((By.XPATH, "//button[@data-testid='button']"))
         )
@@ -153,7 +154,7 @@ def nineth_setting(driver):
     print("clicked redeem credit button")
 
 
-# this is working, make it a common class
+# this is working, make it a common class later, maybe create a json file in this folder and add text from there
 def common_class(driver,text):
     setting_button = driver.find_element(By.XPATH, f"//div[text()='{text}']")
     driver.execute_script("arguments[0].click();", setting_button)

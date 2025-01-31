@@ -28,9 +28,18 @@ def initialize_driver(access_type):
 # TO SELF, CHANGE FOR SIGNUP .. 
 def enter_info(driver):
     if "sign-up" in driver.current_url:
-        Messagebox=WebDriverWait(driver,10).until(
-        EC.element_to_be_clickable((By.XPATH,"(//div[@class='css-175oi2r r-1phboty'])[2]"))
-    ).click()
+        time.sleep(10)
+        script = """
+const buttons = document.querySelectorAll('div');
+buttons.forEach(button => {
+  if (button.textContent.trim() === 'Continue') {
+    button.click();
+    console.log('Continue button clicked.');
+  }
+});
+"""
+        driver.execute_script(script)
+        print("Function ended, button clicked")
     else: 
         print("No box to click")
 
@@ -61,10 +70,11 @@ def enter_info(driver):
         )
         tick_box.click()
 
-        sign_in_next = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.XPATH, "//div[@class='css-175oi2r r-1phboty']"))
-        )
-        sign_in_next.click()
+        submit_button=WebDriverWait(driver,10).until(
+        EC.element_to_be_clickable((By.XPATH,"(//div[contains(text(),'Continue')])[2]"))
+    )
+        submit_button.click()
+        print("button clicked")
     else:
         print("Unexpected URL!")
         driver.quit()

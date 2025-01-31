@@ -8,7 +8,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
 
 
-from Utils.Functions import (
+from utils.Functions import (
     initialize_driver,
     enter_info
     
@@ -18,7 +18,7 @@ def main():
     driver = initialize_driver('sign-up')
 
     try: 
-        enter_info(driver,'aduggal+fromvs@amenify.com','Akulduggal46@123456')
+        enter_info(driver)
         time.sleep(4)
         #this is working...IF BELOW WORKS, REMOVE THIS
         '''input_fields = WebDriverWait(driver, 10).until(
@@ -72,7 +72,7 @@ def main():
 
         #CREATE BUTTON
         clicking=WebDriverWait(driver, 10).until(
-            EC.element_to_be_clickable((By.XPATH, "(//div[@class='css-175oi2r r-1phboty'])[2]"))
+            EC.element_to_be_clickable((By.XPATH, "(//div[contains(text(),'Create an account')])[1]"))
         )
         clicking.click()
 
