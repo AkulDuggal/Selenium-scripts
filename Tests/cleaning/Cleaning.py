@@ -15,8 +15,6 @@ def main():
         time.sleep(2)
         click_next_button(driver)
         time.sleep(2)
-        click_skip_button(driver)
-        time.sleep(2)
         service_selection(driver,"Standard")
         time.sleep(2)
         second_next_button(driver)
@@ -27,7 +25,7 @@ def main():
         time.sleep(2)
         next_button_for_cleaning1(driver)
         time.sleep(2)
-        date_selection(driver, 20)
+        date_selection(driver, 28)
         time.sleep(2)
         next_button_for_cleaning1(driver)
         time.sleep(2)
@@ -43,7 +41,6 @@ def main():
         time.sleep(2)
         check(driver)
         print("flow complete")
-
 
         time.sleep(10)
     except Exception as e:
