@@ -424,3 +424,11 @@ def submit(driver):
     print("button clicked")
     time.sleep(5)
 
+def check(driver):
+    button=WebDriverWait(driver,10).until(
+        EC.element_to_be_clickable((By.XPATH,"(//button[@role='button'])[3]"))
+    )
+    button.click()
+    print("viewing the appointment page")
+    time.sleep(2)
+

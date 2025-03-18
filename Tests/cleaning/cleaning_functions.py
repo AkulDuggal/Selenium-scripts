@@ -136,7 +136,7 @@ def service_selection(driver,service_text):
 def second_next_button(driver): 
     time.sleep(1)   
     standard = WebDriverWait(driver, 10).until(
-        EC.element_to_be_clickable((By.XPATH, "(//span[normalize-space()='Next'])[1]"))
+        EC.element_to_be_clickable((By.XPATH, "(//div[text()='Next'])[2]"))
     )
     #(//span[normalize-space()='Next'])[1]
     time.sleep(1)
@@ -252,6 +252,16 @@ if (nextButton) {
   console.log("Next button not found!");
 }
 """
+    script = """
+const divs = document.querySelectorAll('div');
+divs.forEach(div => {
+  if (div.textContent.trim() === 'Next') {
+    div.click();
+  }
+});
+"""
+    driver.execute_script(script)
+    print("function ended, button clicked")
 
 # Execute the JavaScript
     driver.execute_script(script)

@@ -13,15 +13,23 @@ def main():
         choose_type(driver,'single')
         time.sleep(2)
         chores_popup_button(driver)
+        time.sleep(2)
         second_next_button_chores(driver)
+        time.sleep(2)
         selecting_chores(driver) #hard coded names, fix later
+        time.sleep(2)
         second_next_button_chores(driver)
+        time.sleep(2)
         date_selection(driver, 30)
+        time.sleep(2)
         checkout_button(driver)
+        time.sleep(2)
         pro_tip(driver,1) #hard coded the value in xpath
+        time.sleep(2)
         checkout(driver)
         time.sleep(2)
         submit(driver)
+        check(driver)
         
         #promocode(driver,'OFF')
         time.sleep(10)

@@ -28,9 +28,18 @@ def initialize_driver(access_type):
 # TO SELF, CHANGE FOR SIGNUP .. 
 def enter_info(driver):
     if "sign-up" in driver.current_url:
-        Messagebox=WebDriverWait(driver,10).until(
-        EC.element_to_be_clickable((By.XPATH,"(//div[@class='css-175oi2r r-1phboty'])[2]"))
-    ).click()
+        time.sleep(10)
+        script = """
+const buttons = document.querySelectorAll('div');
+buttons.forEach(button => {
+  if (button.textContent.trim() === 'Continue') {
+    button.click();
+    console.log('Continue button clicked.');
+  }
+});
+"""
+        driver.execute_script(script)
+        print("Function ended, button clicked")
     else: 
         print("No box to click")
 
@@ -61,10 +70,11 @@ def enter_info(driver):
         )
         tick_box.click()
 
-        sign_in_next = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.XPATH, "//div[@class='css-175oi2r r-1phboty']"))
-        )
-        sign_in_next.click()
+        submit_button=WebDriverWait(driver,10).until(
+        EC.element_to_be_clickable((By.XPATH,"(//div[contains(text(),'Continue')])[2]"))
+    )
+        submit_button.click()
+        print("button clicked")
     else:
         print("Unexpected URL!")
         driver.quit()
@@ -348,32 +358,43 @@ def amenify_one(driver):
 def amenify_credits(driver, amount,type):
     if type == "Card":
         credits=WebDriverWait(driver,10).until(
-            EC.element_to_be_clickable((By.XPATH,"(//div[@class='css-175oi2r r-1i6wzkk r-lrvibr r-1loqt21 r-1otgn73'])[4]"))
+            EC.element_to_be_clickable((By.XPATH,"(//div[normalize-space()='Buy an Amenify Gift Card'])[1]"))
             )
         credits.click()
         print("amenify gift card selected")
         time.sleep(2)
+        credits=WebDriverWait(driver,10).until(
+        EC.visibility_of_element_located((By.XPATH,"(//input[@placeholder='Enter a value between $50 and $500*'])"))
+            )
+        credits.send_keys({amount})
+
+        credits=WebDriverWait(driver,10).until(
+            EC.element_to_be_clickable((By.XPATH,"(//div[contains(text(),'Buy Gift Card')])[1]"))
+            )
+        credits.click()
+        print("credits bought")
 
     elif type == "Credits":
         credits=WebDriverWait(driver,10).until(
-            EC.element_to_be_clickable((By.XPATH,"(//div[@class='css-175oi2r r-1i6wzkk r-lrvibr r-1loqt21 r-1otgn73'])[5]"))
+            EC.element_to_be_clickable((By.XPATH, "//div[contains(text(), 'Credits')]"))
             )
         credits.click()
         print("discounted credits box clicked")
 
-    credits=WebDriverWait(driver,10).until(
-        EC.visibility_of_element_located((By.XPATH,"(//input[@placeholder='Enter a value between $50 and $500*'])"))
+        credits=WebDriverWait(driver,10).until(
+            EC.visibility_of_element_located((By.XPATH,"(//input[@placeholder='Enter a value between $50 and $500*'])"))
             )
-    credits.send_keys({amount})
+        credits.send_keys({amount})
 
-    credits=WebDriverWait(driver,10).until(
-        EC.element_to_be_clickable((By.XPATH,"(//div[@class='css-175oi2r r-1awozwy r-1777fci'])[2]"))
-
-        )
-    credits.click()
-    print("credits bought")
+        credits=WebDriverWait(driver,10).until(
+            EC.element_to_be_clickable((By.XPATH,"(//div[contains(text(),'Buy Credits')])[1]"))
+            )
+        credits.click()
+        print("credits bought")
+    else:
+        print("No such survice")
             
-    time.sleep(10)
+        time.sleep(10)
 
     
 def chores_popup_button(driver):
