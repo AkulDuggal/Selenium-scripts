@@ -30,38 +30,55 @@ def cleaning_popup_button(driver):
 
 def next_button_for_cleaning1(driver):
     #look into this,, why is it not working
-    
-    print("******************123")
-    time.sleep(10)
-    print("******************456")
-    script="""
-    console.log("CHAL RAHHI HAI");
-const divs = document.querySelectorAll('button');
-divs.forEach(div => {
-  if (div.textContent.trim() === 'OK') {
-  console.log("MILGYA");
-    div.click(); 
-  }
-  console.log("BAKWAAS");
-});
+    # Get current window handles
+    current_window = driver.current_window_handle
+    all_windows = driver.window_handles
+
+# Switch to the new window (assuming it's the last one opened)
+    for window in all_windows:
+        if window != current_window:
+            driver.switch_to.window(window)
+            break
+
+# Now execute the script after switching
+    script = """
+    console.log("WORKING");
+    const divs = document.querySelectorAll('button');
+    divs.forEach(div => {
+        if (div.textContent.trim() === 'OK') {
+            console.log("FOUND");
+            div.click();
+        }
+        console.log("DIDNT WORK");
+    });
 """
-    
+
+# Run the script in the new window
     driver.execute_script(script)
     print("OK button clicked successfully!")
 
+def date_selection_box(driver):
+    date_button=WebDriverWait(driver,10).until(EC.element_to_be_clickable((By.XPATH,"(//input[@id='dpDate'])[1]")))
+    date_button.click()
+    print("date box clicked") 
+
+def date_selection(driver,date):
+    div_element = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.XPATH, f"(//a[normalize-space()='{date}'])[1]"))
+        )
+    
+    div_element.click()
+    print(f"Clicked the div element at index {date}")
+
+def checkout(driver):
+    button=WebDriverWait(driver,10).until(EC.element_to_be_clickable((By.XPATH, "(//button[@id='create-order-btn'])[1]")))
+    button.click()
+    print("button clicked")
 
 
-def trying(driver):
-    WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.CLASS_NAME, "swal-modal"))
-    )
-
-    # Wait for the OK button and click it
-    ok_button = WebDriverWait(driver, 10).until(
-        EC.element_to_be_clickable((By.XPATH, "//button[contains(@class, 'swal-button') and contains(@class, 'swal-button--confirm') and text()='OK']"))
-    )
-    ok_button.click()
-    print("OK button clicked successfully.")
+def final_buttons(driver,text):
+    button=WebDriverWait(driver,10).until(EC.element_to_be_clickable((By.XPATH, f"(//button[normalize-space()='{text}'])[1]")))
+    button.click()
 
 
 def main():
@@ -76,10 +93,16 @@ def main():
         time.sleep(2)
         click_service_by_text(driver,'Handyman')
         time.sleep(5)
-
         next_button_for_cleaning1(driver)
+        time.sleep(2)
+        date_selection_box(driver)
+        time.sleep(2)
+        date_selection(driver,28)
+        time.sleep(2)
+        checkout(driver)
+        final_buttons(driver,'Confirm')
 
-        time.sleep(1000)
+        time.sleep(10)
 
 
 
@@ -87,7 +110,7 @@ def main():
         print(f"An error occurred: {e}")
     finally:
         #driver.quit()
-        time.sleep(300000)
+        time.sleep(30)
 
 if __name__ == "__main__":
     main()
