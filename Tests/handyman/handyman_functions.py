@@ -109,14 +109,10 @@ def next_button_for_cleaning1(driver):
     # Get current window handles
     current_window = driver.current_window_handle
     all_windows = driver.window_handles
-
-# Switch to the new window (assuming it's the last one opened)
     for window in all_windows:
         if window != current_window:
             driver.switch_to.window(window)
             break
-
-# Now execute the script after switching
     script = """
     console.log("WORKING");
     const divs = document.querySelectorAll('button');
@@ -128,8 +124,6 @@ def next_button_for_cleaning1(driver):
         console.log("DIDNT WORK");
     });
 """
-
-# Run the script in the new window
     driver.execute_script(script)
     print("OK button clicked successfully!")
 
