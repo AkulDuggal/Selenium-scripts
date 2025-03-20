@@ -432,3 +432,27 @@ def check(driver):
     print("viewing the appointment page")
     time.sleep(2)
 
+def new_chores_list(driver):
+    time.sleep(5)  # Wait for elements to load
+
+    script = """
+const items = document.querySelectorAll('.css-175oi2r.r-42olwf.r-z2wwpe.r-rs99b7.r-5oul0u.r-w7s2jr.r-1qhn6m8.r-eoizbr');
+if (items.length > 0) {
+    items[1].click();  // Click the first item
+    console.log('Clicked on the first item!');
+    
+    if (items.length > 1) {
+        items[2].click();  // Click the second item
+        console.log('Clicked on the second item!');
+    }
+    
+    if (items.length > 2) {
+        items[3].click();  // Click the third item
+        console.log('Clicked on the third item!');
+    }
+} else {
+    console.log('No matching elements found!');
+}
+"""
+    driver.execute_script(script)
+    print("First 3 items clicked successfully!")
