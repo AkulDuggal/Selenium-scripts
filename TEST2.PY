@@ -101,26 +101,65 @@ def type(driver,text):
     print(f"{text} clicked")
     
     
-#this is not working, check
-def store(driver):    
-    word_to_search='food-grocery-delivery'
-    if word_to_search in driver.current_url:
-        print(f"Switched to window with URL containing '{word_to_search}'")
+def final_store(driver):
+    time.sleep(5)
+    iframes = driver.find_elements(By.TAG_NAME, "iframe")
+    if len(iframes) > 0:
+        driver.switch_to.frame(iframes[0])  # Switch to the correct iframe
+        print("Switched to iframe 0.")
     else:
-        print(" not in correct page")
-    
-    script ="""
+        print("No iframes found!")
+        return
+
+    # Updated JavaScript to run within the iframe
+    script = """
 const stores = document.querySelectorAll(".store-overview-item-3");
-if (stores.length > 1) {
-    const firstStore = stores[1];
-    firstStore.click();
+if (stores.length > 0) {
+    stores[0].click();  // Click the first store directly
     console.log("First store clicked successfully!");
 } else {
     console.log("No store entries found.");
 }
 """
+    # Execute the script inside the iframe
     driver.execute_script(script)
-    print(" store clicked successfully!")
+    print("Store clicked successfully!")
+
+    # Switch back to the main content after executing JS
+    driver.switch_to.default_content()
+
+def store_test(driver):
+    time.sleep(5)
+    
+    # Switch directly to iframe 0
+    iframes = driver.find_elements(By.TAG_NAME, "iframe")
+    if len(iframes) > 0:
+        driver.switch_to.frame(iframes[0])
+        print("Switched directly to iframe 0.")
+    else:
+        print("No iframes found!")
+        return
+    
+    # Wait for store elements to load in iframe 0
+    try:
+        stores = WebDriverWait(driver, 15).until(
+            EC.presence_of_all_elements_located((By.CLASS_NAME, "store-overview-item-3"))
+        )
+        print(f"Number of stores found: {len(stores)}")
+        
+        if len(stores) > 0:
+            # Click the first store (index 0, not 1)
+            stores[1].click()
+            print("First store clicked successfully!")
+        else:
+            print("No store entries found.")
+    
+    except Exception as e:
+        print(f"An error occurred: {str(e)}")
+
+    # Switch back to main content
+    driver.switch_to.default_content()
+
 
 
 def main():
@@ -133,7 +172,9 @@ def main():
         time.sleep(10)
         type(driver,'Food')
         time.sleep(2)
-        store(driver)
+        #these both work, keeping here as sometimes they dont work
+        #store_test(driver)
+        #final_store(driver)
         time.sleep(5)
 
 
