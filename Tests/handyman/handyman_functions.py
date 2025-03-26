@@ -149,3 +149,22 @@ def checkout(driver):
 def final_buttons(driver,text):
     button=WebDriverWait(driver,10).until(EC.element_to_be_clickable((By.XPATH, f"(//button[normalize-space()='{text}'])[1]")))
     button.click()
+
+def info_dogwalk(driver,name,age,breed):
+    field1=WebDriverWait(driver,10).until(EC.element_to_be_clickable((By.XPATH,"(//input[@id='field-id-20'])[1]")))
+    field2=WebDriverWait(driver,10).until(EC.element_to_be_clickable((By.XPATH,"(//input[@id='field-id-21'])[1]")))
+    field3=WebDriverWait(driver,10).until(EC.element_to_be_clickable((By.XPATH,"(//input[@id='field-id-22'])[1]")))
+    field1.click()
+    field2.click()
+    field3.click()
+    print("Button clicked")
+    field1.send_keys(f"{name}")
+    print("name added")
+
+    print("Button clicked")
+    field2.send_keys(f"{age}")
+    print("name added")
+
+    print("Button clicked")
+    field3.send_keys(f"{breed}")
+    print("name added")
