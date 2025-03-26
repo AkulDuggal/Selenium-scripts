@@ -1,46 +1,50 @@
+import unittest
 import time
 from .chores_functions import *
     
-def main():
-    driver=initialize_driver('sign-in')
-    try:
-        enter_info(driver)
-        time.sleep(2)
-        click_service_by_text(driver,'Chores')
-        change_unit_number(driver, '1')
-        change_bedroom_bathroom(driver, 2, 3)
-        click_next_button(driver)
-        choose_type(driver,'single')
-        time.sleep(2)
-        chores_popup_button(driver)
-        time.sleep(2)
-        second_next_button_chores(driver)
-        time.sleep(2)
-        new_chores_list(driver)
-        time.sleep(2)
-        second_next_button_chores(driver)
-        time.sleep(2)
-        date_selection(driver, 30)
-        time.sleep(2)
-        checkout_button(driver)
-        time.sleep(2)
-        pro_tip(driver,1) #hard coded the value in xpath
-        time.sleep(2)
-        checkout(driver)
-        time.sleep(2)
-        submit(driver)
-        check(driver)
+class TestChores(unittest.TestCase):
+    def setUp(self):
+        self.driver = initialize_driver('sign-in')
+    
+    def test_chores_flow(self):
+        try:
+            enter_info(self.driver)
+            time.sleep(2)
+            click_service_by_text(self.driver,'Chores')
+            change_unit_number(self.driver, '1')
+            change_bedroom_bathroom(self.driver, 2, 3)
+            click_next_button(self.driver)
+            choose_type(self.driver,'single')
+            time.sleep(2)
+            chores_popup_button(self.driver)
+            time.sleep(2)
+            second_next_button_chores(self.driver)
+            time.sleep(2)
+            new_chores_list(self.driver)
+            time.sleep(2)
+            second_next_button_chores(self.driver)
+            time.sleep(2)
+            date_selection(self.driver, 30)
+            time.sleep(2)
+            checkout_button(self.driver)
+            time.sleep(2)
+            pro_tip(self.driver,1) #hard coded the value in xpath
+            time.sleep(2)
+            checkout(self.driver)
+            time.sleep(2)
+            submit(self.driver)
+            check(self.driver)
         
         #promocode(driver,'OFF')
-        time.sleep(10)
+            time.sleep(10)
 
-    except Exception as e:
-        print(f"An error occurred: {e}")
-    finally:
-        driver.quit()
+        except Exception as e:
+            print(f"An error occurred: {e}")
+        def tearDown(self):
+            self.driver.quit()
 
 if __name__ == "__main__":
-    main()
+        unittest.main()
 
 
 

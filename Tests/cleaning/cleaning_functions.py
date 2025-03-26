@@ -11,6 +11,7 @@ import time
 from selenium.webdriver.common.action_chains import ActionChains
 import json
 
+
 with open("config.json", "r") as file:
     config = json.load(file)
 
