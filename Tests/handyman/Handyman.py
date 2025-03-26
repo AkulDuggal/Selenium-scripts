@@ -8,10 +8,6 @@ def main():
     try: 
         enter_info(driver)
         time.sleep(2)
-
-        #HANDYMAN TESTING
-        #first_window=driver.current_window_handle
-        time.sleep(2)
         click_service_by_text(driver,'Handyman')
         time.sleep(5)
         next_button_for_cleaning1(driver)

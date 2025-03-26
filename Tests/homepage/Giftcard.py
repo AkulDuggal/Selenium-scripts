@@ -24,6 +24,7 @@ def main():
         time.sleep(10)''' # need to find a way to put this in if/else as it only happens onc a month.
 
         amenify_credits(driver,'50',"Card") 
+        time.sleep(10)
         amenify_credits(driver,'50',"Credits")
         time.sleep(10)
 

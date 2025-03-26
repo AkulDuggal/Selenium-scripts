@@ -226,19 +226,19 @@ def final_button_chore(driver):
 
 def add_ons(driver):
         standard = WebDriverWait(driver, 10).until(
-            EC.element_to_be_clickable((By.XPATH, "(//div[@class='css-175oi2r r-1uavh4e r-42olwf r-z2wwpe r-rs99b7 r-5oul0u r-w7s2jr r-1qhn6m8 r-eoizbr'])[8]"))
+            EC.element_to_be_clickable((By.XPATH, "(//div[contains(text(),'Matt_testing Addon 6.50')])[1]"))
             )     
         standard.click() 
         print("first addon selected")  
         
         standard = WebDriverWait(driver, 10).until(
-            EC.element_to_be_clickable((By.XPATH, "(//div[@class='css-175oi2r r-1uavh4e r-42olwf r-z2wwpe r-rs99b7 r-5oul0u r-w7s2jr r-1qhn6m8 r-eoizbr'])[9]"))
+            EC.element_to_be_clickable((By.XPATH, "(//div[contains(text(),'Matt_testing Addon 9.5')])[1]"))
             ) 
         standard.click()
         print("second addon added")
 
         standard = WebDriverWait(driver, 10).until(
-            EC.element_to_be_clickable((By.XPATH, "(//div[@class='css-175oi2r r-1uavh4e r-42olwf r-z2wwpe r-rs99b7 r-5oul0u r-w7s2jr r-1qhn6m8 r-eoizbr'])[10]"))
+            EC.element_to_be_clickable((By.XPATH, "(//div[contains(text(),'Dishes')])[1]"))
             ) 
         standard.click()
         print("third addon added")
@@ -330,3 +330,24 @@ def check(driver):
     button.click()
     print("viewing the appointment page")
     time.sleep(2)
+
+
+def new_chores_list(driver):
+    time.sleep(5)  # Wait for elements to load
+
+    script = """
+// Get all parent divs with the required class
+const items = document.querySelectorAll('.css-175oi2r > .css-175oi2r.r-42olwf.r-z2wwpe.r-rs99b7.r-5oul0u.r-w7s2jr.r-1qhn6m8.r-eoizbr');
+let clickedCount = 0;
+for (let i = 0; i < items.length; i++) {
+    if (!items[i].closest('.r-ddtstp')) {  // Avoid the unwanted dialog box
+        items[i].click();
+        console.log(`Clicked on item ${i + 1}`);
+        clickedCount++;
+        if (clickedCount >= 3) {
+            break;  // Stop after clicking the first 3 valid elements
+        }
+    }
+} """
+    driver.execute_script(script)
+    print("First 3 items clicked successfully!")
