@@ -17,8 +17,8 @@ def main():
         date_selection(driver,28)
         time.sleep(2)
         info_dogwalk(driver,'test name','7','random')
-        '''checkout(driver)
-        final_buttons(driver,'Confirm')'''
+        checkout(driver)
+        final_buttons(driver,'Confirm')
 
         time.sleep(10)
 
