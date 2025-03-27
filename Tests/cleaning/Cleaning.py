@@ -27,11 +27,11 @@ class TestCleaning(unittest.TestCase):
             time.sleep(2)
             next_button_for_cleaning1(self.driver)
             time.sleep(2)
-            date_selection(self.driver, 28)
+            date_selection(self.driver, 30)
             time.sleep(2)
             next_button_for_cleaning1(self.driver)
             time.sleep(2)
-            # add_ons(self.driver)  # Uncomment if working
+            add_ons(self.driver)  
             time.sleep(2)
             last_next_button(self.driver)
             time.sleep(2)

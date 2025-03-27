@@ -116,6 +116,7 @@ def fifth_setting(driver):
     switch.click()
     print("clicked")
     time.sleep(1)
+    switch.click()
 
     switch=WebDriverWait(driver,10).until(
         EC.element_to_be_clickable((By.XPATH,"(//input[@role='switch'])[2]"))
@@ -130,10 +131,10 @@ def fifth_setting(driver):
     print("Closed popup")'''
 
 def sixth_setting(driver):
-    setting_button = driver.find_element(By.XPATH, "//div[text()='Amenify One Membership']")
+    setting_button = driver.find_element(By.XPATH, "//div[text()='Amenify Bundle Subscription']")
     driver.execute_script("arguments[0].click();", setting_button)
 
-    print("clicked amenify one membership")
+    print("clicked amenify bundle membership")
 
 def seventh_setting(driver):
     setting_button = driver.find_element(By.XPATH, "//div[text()='Unsubscribe a service']")

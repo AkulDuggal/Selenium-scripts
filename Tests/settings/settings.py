@@ -1,4 +1,4 @@
-from utils.Functions import (
+from Utils.Functions import (
     initialize_driver,
     enter_info,  
 )
@@ -12,19 +12,20 @@ def main():
         time.sleep(5)
         settings(driver)
         time.sleep(4)
-        setting_one(driver)
+        '''setting_one(driver)
         time.sleep(1)
         setting_two(driver)
         time.sleep(3)
         third_setting(driver)
         time.sleep(2)
         fourth_setting(driver)
-        time.sleep(2)
+        time.sleep(2)'''
         #fifth_setting(driver)
+        time.sleep(2)
         sixth_setting(driver)
-        seventh_setting(driver)
+        '''seventh_setting(driver)
         eigth_setting(driver)
-        nineth_setting(driver)
+        nineth_setting(driver)'''
         #settings_common(driver)
         
     
