@@ -25,11 +25,11 @@ def main():
         time.sleep(2)
         next_button_for_cleaning1(driver)
         time.sleep(2)
-        date_selection(driver, 28)
+        date_selection(driver, 29)
         time.sleep(2)
         next_button_for_cleaning1(driver)
         time.sleep(2)
-        #add_ons(driver) #CHECK THIS , GIVING PROBLEM
+        add_ons(driver) #CHECK THIS , GIVING PROBLEM
         time.sleep(2)
         last_next_button(driver)
         time.sleep(2)

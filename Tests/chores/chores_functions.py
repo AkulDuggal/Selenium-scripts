@@ -441,15 +441,15 @@ if (items.length > 0) {
     items[1].click();  // Click the first item
     console.log('Clicked on the first item!');
     
-    if (items.length > 1) {
-        items[2].click();  // Click the second item
-        console.log('Clicked on the second item!');
-    }
+if (items.length > 1) {
+    items[3].click();  // Click the second item
+    console.log('Clicked on the second item!');
+}
     
-    if (items.length > 2) {
-        items[3].click();  // Click the third item
-        console.log('Clicked on the third item!');
-    }
+if (items.length > 2) {
+    items[5].click();  // Click the third item
+    console.log('Clicked on the third item!');
+}
 } else {
     console.log('No matching elements found!');
 }
