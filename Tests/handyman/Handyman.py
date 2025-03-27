@@ -1,29 +1,31 @@
+import unittest
 import time
 from .handyman_functions import *
 
 
-def main():
-    driver = initialize_driver('sign-in')
+class TestHandyman(unittest.TestCase):
+    def setUp(self):
+        self.driver = initialize_driver('sign-in')
 
-    try: 
-        enter_info(driver)
-        time.sleep(2)
-        click_service_by_text(driver,'Handyman')
-        time.sleep(5)
-        next_button_for_cleaning1(driver)
-        time.sleep(2)
-        date_selection_box(driver)
-        time.sleep(2)
-        date_selection(driver,28)
-        time.sleep(2)
-        checkout(driver)
-        final_buttons(driver,'Confirm')
+    def test_chores_flow(self):
+        try:
+            enter_info(self.driver)
+            time.sleep(2)
+            click_service_by_text(self.driver,'Handyman')
+            time.sleep(5)
+            next_button_for_cleaning1(self.driver)
+            time.sleep(2)
+            date_selection_box(self.driver)
+            time.sleep(2)
+            date_selection(self.driver,28)
+            time.sleep(2)
+            checkout(self.driver)
+            final_buttons(self.driver,'Confirm')
 
-    except Exception as e:
-        print(f"An error occurred: {e}")
-    finally:
-        #driver.quit()
-        time.sleep(30)
+        except Exception as e:
+            print(f"An error occurred: {e}")
+        def tearDown(self):
+            self.driver.quit()
 
 if __name__ == "__main__":
-    main()
+        unittest.main()
